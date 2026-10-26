@@ -1411,6 +1411,25 @@ header.top{border-bottom:1px solid var(--band-line)}
 .pack.hl .pk-cta{border-color:var(--band-fg)!important}
 .lvl{border:1.5px solid color-mix(in srgb,var(--ink) 45%,transparent);background:var(--white)}
 .lvl:hover{border-color:var(--ink)}
+
+/* ===== Parte final del home ===== */
+.faqm-head{align-items:flex-end;margin-bottom:32px}
+.faqm-head .eyebrow{margin:0 0 14px}
+.takeaway{margin-top:28px}
+#contacto .book-card{border:1px solid var(--line)}
+.f2-grid{grid-template-columns:minmax(0,1.5fr) minmax(0,1.3fr) minmax(0,.9fr);gap:40px 56px;align-items:start}
+.f2-nav ul{grid-template-columns:repeat(2,minmax(0,max-content));column-gap:48px}
+.f2-portal{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid var(--band-line);border-radius:999px;color:var(--band-fg);text-decoration:none;font-size:.88rem;font-weight:600;transition:border-color .2s,background-color .2s}
+.f2-portal:hover{border-color:var(--band-fg);background:rgba(248,248,246,.06)}
+.f2-portal svg{width:16px;height:16px}
+.f2-legal{justify-content:space-between}
+@media (max-width:900px){.f2-grid{grid-template-columns:1fr 1fr}.f2-brand{grid-column:1/-1}}
+@media (max-width:560px){.f2-grid{grid-template-columns:1fr}.f2-nav ul{column-gap:28px}}
+
+#quickSlots > .quick-slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+#quickSlots > .quick-slots .qs{min-width:0}
+.qs-more{text-align:center;justify-items:center;padding-inline:8px}
+@media (max-width:560px){#quickSlots > .quick-slots{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 
 </head>
@@ -1611,7 +1630,7 @@ header.top{border-bottom:1px solid var(--band-line)}
 <!-- 6 · PREGUNTAS (resumen) -->
 <section class="alt faq-mini" id="faq" aria-labelledby="h-faqm">
   <div class="wrap">
-    <div class="faqm-head"><h2 id="h-faqm">Antes de reservar</h2><a class="link" href="#preguntas" data-track="cta_all_faq">Ver todas las preguntas →</a></div>
+    <div class="faqm-head"><div><p class="eyebrow">Preguntas frecuentes</p><h2 id="h-faqm">Antes de reservar</h2></div><a class="link" href="#preguntas" data-track="cta_all_faq">Ver todas las preguntas →</a></div>
     <div class="faqm-grid">
       <details><summary>¿Cuánto tiempo me va a quitar a mí?</summary><div class="a"><p><b>20–30 minutos a la semana.</b> Una reunión de dirección y dos reportes al mes. El trabajo con el equipo lo coordina DEX.</p></div></details>
       <details><summary>¿Cuánto dura y hay permanencia?</summary><div class="a"><p><b>Un plan de 12 meses desde el mes en que empiezas.</b> La duración y las condiciones concretas se acuerdan en la propuesta de trabajo.</p></div></details>
@@ -2257,14 +2276,13 @@ header.top{border-bottom:1px solid var(--band-line)}
     <div class="f2-grid">
       <div class="f2-brand">
         <a class="logo logo-full" href="#inicio" aria-label="DEX, ir al inicio"><span class="w">DEX</span><span class="bar"></span><span class="d">DIRECCIÓN EXTERNA</span><span class="p">PARA CLÍNICAS DENTALES</span></a>
-        <p>Gestión y dirección externa para clínicas dentales: diagnóstico, objetivos, protocolos y seguimiento durante 12 meses junto a la propiedad.</p>
-        <a class="btn f2-cta" href="#contacto" data-track="cta_footer">Reservar mi café de 30 min <span class="arr" aria-hidden="true">→</span></a>
+        <p>Dirección externa para clínicas dentales: diagnóstico, objetivos, protocolos y seguimiento durante 12 meses junto a la propiedad. Modelo híbrido, presencial y remoto.</p>
+        <a class="f2-portal" href="https://portal.dexdireccionygestion.com" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Acceso clientes · Portal DEX</a>
       </div>
-      <nav class="f2-col" aria-label="Pie de página"><h4>DEX</h4><ul><li><a href="#servicios">Qué hace DEX</a></li><li><a href="#metodo">Método</a></li><li><a href="#inversion-detalle">Inversión</a></li><li><a href="#autodiagnostico">Autodiagnóstico</a></li><li><a href="#preguntas">Preguntas</a></li><li><a href="#blog">Blog</a></li><li><a href="https://portal.dexdireccionygestion.com" rel="noopener">Acceso clientes</a></li></ul></nav>
-      <div class="f2-col"><h4>Contacto</h4><ul id="footContact"></ul></div>
+      <nav class="f2-col f2-nav" aria-label="Pie de página"><h4>Explora</h4><ul><li><a href="#servicios">Qué hace DEX</a></li><li><a href="#metodo">Método</a></li><li><a href="#inversion-detalle">Inversión</a></li><li><a href="#autodiagnostico">Autodiagnóstico</a></li><li><a href="#preguntas">Preguntas</a></li><li><a href="#blog">Blog</a></li></ul></nav>
       <div class="f2-col"><h4>Legal</h4><ul><li><a href="#aviso-legal">Aviso legal</a></li><li><a href="#privacidad">Política de privacidad</a></li><li><a href="#cookies">Política de cookies</a></li></ul></div>
     </div>
-    <div class="f2-legal"><span id="legalLine"></span><span class="f2-cov">Modelo híbrido, presencial y remoto</span><button class="f2-theme" id="themeBtn" type="button">Cambiar tema</button></div>
+    <div class="f2-legal"><span id="legalLine"></span><button class="f2-theme" id="themeBtn" type="button">Cambiar tema</button></div>
   </div>
 </footer>
 
@@ -2544,7 +2562,7 @@ function renderContact(){
   const FI = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
   const mail = FI('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>'), tel = FI('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>'), wa = FI('<path d="M4 20l1.3-4A8 8 0 1 1 8 19z"/><path d="M9 10c0 3 2 5 5 5l1-1.5-2-1-1 1c-1-.5-1.5-1-2-2l1-1-1-2z"/>');
   const at = esc(c.email).replace("@","@<wbr>");
-  $("#footContact").innerHTML = `<li><a href="mailto:${esc(c.email)}">${mail}<span>${at}</span></a></li><li><a href="tel:${esc(c.telefono.replace(/\s/g,""))}">${tel}<span>${esc(c.telefono)}</span></a></li>` +
+  if($("#footContact")) $("#footContact").innerHTML = `<li><a href="mailto:${esc(c.email)}">${mail}<span>${at}</span></a></li><li><a href="tel:${esc(c.telefono.replace(/\s/g,""))}">${tel}<span>${esc(c.telefono)}</span></a></li>` +
     (c.whatsapp ? `<li><a href="${waLink()}" target="_blank" rel="noopener">${wa}<span>WhatsApp</span></a></li>` : "") +
     c.redes.map(r=>`<li><a href="${esc(r.url)}" rel="noopener" target="_blank"><span>${esc(r.nombre)}</span></a></li>`).join("");
   const E = CONFIG.empresa;
