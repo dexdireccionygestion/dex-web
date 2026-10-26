@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.dexdireccionygestion.com/sitemap.xml
