@@ -1377,6 +1377,29 @@ header.top{border-bottom:1px solid var(--band-line)}
 .pack.hl .pk-cta{border-color:var(--band-fg)}
 .pk-cta{justify-content:space-between}
 .mcta .btn,.btn-block{justify-content:center}
+
+/* ===== Diferenciar bloques: ritmo de fondos y separadores ===== */
+:root{--sand:#ECE7DC;--white:#FFFFFF}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sand:#141416;--white:#0F0F11}}
+:root[data-theme="dark"]{--sand:#141416;--white:#0F0F11}
+#home > section{position:relative;border-top:1px solid var(--line)}
+#home > section.hero{border-top:0}
+#problema{background:var(--white)}
+#prueba{background:var(--sand)}
+.mid-cta{--band:#0B0B0D;--band-3:#18181B;--band-fg:#F8F8F6;--band-2:#A9A9AE;--band-line:rgba(248,248,246,.15);--band-acc:#C9C9CC;background:#0B0B0D;color:#F8F8F6}
+#servicios{background:var(--white)}
+#inversion{background:var(--paper-2)}
+#faq{background:var(--white)}
+#contacto{background:var(--sand)}
+#contacto .book-card{background:var(--white)}
+/* cabeceras de sección: número + filete para marcar el inicio de cada bloque */
+#home{counter-reset:blq}
+#home > section:not(.hero):not(.mid-cta) > .wrap > .sec-head .eyebrow,
+#home > section:not(.hero):not(.mid-cta) .faqm-head,
+#home > section#contacto .contact-side .eyebrow{counter-increment:blq}
+#home > section:not(.hero) .sec-head .eyebrow::after{content:"";flex:1;height:1px;background:var(--line);min-width:40px}
+#home > section:not(.hero) .sec-head .eyebrow{max-width:none}
+#home > section:not(.hero) .sec-head{margin-bottom:clamp(36px,5vw,56px)}
 </style>
 
 </head>
