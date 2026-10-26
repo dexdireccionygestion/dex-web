@@ -1327,24 +1327,25 @@ dialog::backdrop{background:rgba(11,11,13,.6);backdrop-filter:blur(3px)}
 .logo-full .p{font-size:.44rem;letter-spacing:.42em;margin-right:-.42em;margin-top:6px;opacity:.8;font-weight:500}
 .f2-brand .logo-full{align-items:center}
 /* ===== Hero: el Portal DEX como herramienta ===== */
-.hero-visual{margin:0;min-width:0;display:grid;gap:14px}
-.hv-stage{position:relative;padding:0 0 4px}
-.hv-win{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0F1424;box-shadow:0 40px 80px -40px rgba(0,0,0,.75)}
-.hv-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#1A2033;border-bottom:1px solid rgba(255,255,255,.08)}
-.hv-bar i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18)}
-.hv-bar span{margin-left:10px;font-size:.66rem;letter-spacing:.04em;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);padding:3px 10px;border-radius:999px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+.hero-visual{margin:0;min-width:0;display:grid;gap:16px}
+.hv-stage{position:relative;padding-bottom:6px}
+.hv-win{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:#161B2E;box-shadow:0 40px 90px -40px rgba(0,0,0,.8)}
+.hv-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#1E2438;border-bottom:1px solid rgba(255,255,255,.08)}
+.hv-bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2)}
+.hv-bar span{margin-left:10px;font-size:.7rem;color:rgba(255,255,255,.6);background:rgba(255,255,255,.07);padding:3px 12px;border-radius:999px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hv-win img,.hv-card img{display:block;width:100%;height:auto}
-.hv-card{position:relative;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 60px -30px rgba(0,0,0,.85),0 0 0 1px rgba(0,0,0,.2)}
-.hv-score{width:92%;margin:-9% 0 0 -6%;z-index:2}
-.hv-plan{width:82%;margin:-4% 0 0 auto;margin-right:-5%;z-index:3}
-.hv-tag{position:absolute;z-index:4;font-size:.68rem;font-weight:600;letter-spacing:.06em;color:#0B0B0D;background:var(--brass);padding:6px 10px;border-radius:999px;box-shadow:0 8px 20px -8px rgba(0,0,0,.6);white-space:nowrap}
-.hv-t1{left:-4%;top:31%}
-.hv-t2{right:4%;bottom:-12px}
-.hero-visual figcaption{font-size:.84rem;color:var(--band-2);line-height:1.5;max-width:46ch}
+.hv-card{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:#161B2E;box-shadow:0 30px 70px -30px rgba(0,0,0,.9)}
+.hv-main{width:100%}
+.hv-plan{width:84%;margin:-3% 0 0 auto;margin-right:-6%;z-index:2}
+.hv-tag{position:absolute;z-index:3;font-size:.7rem;font-weight:600;letter-spacing:.05em;color:#0B0B0D;background:var(--brass);padding:6px 11px;border-radius:999px;box-shadow:0 8px 20px -8px rgba(0,0,0,.6);white-space:nowrap}
+.hv-t1{right:18px;top:-13px}
+.hv-t2{left:4%;bottom:-20px}
+.hero-visual figcaption{font-size:.86rem;color:var(--band-2);line-height:1.5;max-width:48ch}
 .hero-visual figcaption b{color:var(--band-fg);font-weight:600}
-@media (max-width:1100px){.hv-score{margin-left:-2%}.hv-plan{margin-right:-1%}.hv-t1{left:0}.hv-t2{right:0}}
-@media (max-width:900px){.hero-visual{max-width:600px;margin-top:8px}.hv-score{width:96%;margin-left:0}.hv-plan{width:88%;margin-right:0}}
-@media (max-width:520px){.hv-plan,.hv-t2{display:none}.hv-score{width:100%;margin:-6% 0 0}.hv-t1{top:auto;bottom:-6px;left:10px}}
+@media (max-width:1180px){.hv-plan{margin-right:0}}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-visual{max-width:620px;margin-top:8px}}
+@media (max-width:520px){.hv-plan{width:100%;margin:-2% 0 0}.hv-tag{display:none}}
 </style>
 
 </head>
@@ -1404,10 +1405,9 @@ dialog::backdrop{background:rgba(11,11,13,.6);backdrop-filter:blur(3px)}
       <div class="hv-stage">
         <div class="hv-win hv-main">
           <div class="hv-bar" aria-hidden="true"><i></i><i></i><i></i><span>portal.dexdireccionygestion.com</span></div>
-          <img src="assets/portal-clinica.jpg" width="1400" height="497" alt="Portal DEX: ficha de una clínica con sus pestañas de datos mensuales, informes y DEX Score, plan de acción, comunicación y documentos">
+          <img src="assets/portal-dex-score.jpg" width="906" height="352" alt="DEX Score en el Portal DEX: puntuación global de 75 sobre 100 en septiembre, con rentabilidad, agenda y producción y una recomendación para cada área">
         </div>
-        <div class="hv-card hv-score"><img src="assets/portal-dex-score.jpg" width="1100" height="261" alt="DEX Score de septiembre: 75 sobre 100, con rentabilidad, agenda, producción, equipo y procesos"></div>
-        <div class="hv-card hv-plan"><img src="assets/portal-plan-accion.jpg" width="1000" height="301" alt="Plan de acción con tareas, responsable, prioridad y fecha de vencimiento"></div>
+        <div class="hv-card hv-plan"><img src="assets/portal-plan-accion.jpg" width="846" height="280" alt="Plan de acción en el Portal DEX: tareas con estado, responsable, prioridad y fecha de vencimiento"></div>
         <span class="hv-tag hv-t1" aria-hidden="true">DEX Score mensual</span>
         <span class="hv-tag hv-t2" aria-hidden="true">Plan de acción con fechas</span>
       </div>
