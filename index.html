@@ -1337,15 +1337,16 @@ dialog::backdrop{background:rgba(11,11,13,.6);backdrop-filter:blur(3px)}
 .hv-win img,.hv-card img{display:block;width:100%;height:auto}
 .hv-card{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:#161B2E;box-shadow:0 30px 70px -30px rgba(0,0,0,.9)}
 .hv-main{width:100%}
-.hv-plan{width:84%;margin:-3% 0 0 auto;margin-right:-6%;z-index:2}
+.hv-planw{position:relative;width:100%;margin:26px 0 0}
+.hv-plan{width:100%}
 .hv-tag{position:absolute;z-index:3;font-size:.7rem;font-weight:600;letter-spacing:.05em;color:#0B0B0D;background:var(--brass);padding:6px 11px;border-radius:999px;box-shadow:0 8px 20px -8px rgba(0,0,0,.6);white-space:nowrap}
 .hv-t1{right:18px;top:-13px}
-.hv-t2{left:4%;bottom:-20px}
+.hv-t2{right:18px;top:-13px}
 .hero-visual figcaption{font-size:.86rem;color:var(--band-2);line-height:1.5;max-width:48ch}
 .hero-visual figcaption b{color:var(--band-fg);font-weight:600}
-@media (max-width:1180px){.hv-plan{margin-right:0}}
+
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-visual{max-width:620px;margin-top:8px}}
-@media (max-width:520px){.hv-plan{width:100%;margin:-2% 0 0}.hv-tag{display:none}}
+@media (max-width:520px){.hv-planw{width:100%;margin-top:14px}.hv-tag{display:none}}
 </style>
 
 </head>
@@ -1405,11 +1406,13 @@ dialog::backdrop{background:rgba(11,11,13,.6);backdrop-filter:blur(3px)}
       <div class="hv-stage">
         <div class="hv-win hv-main">
           <div class="hv-bar" aria-hidden="true"><i></i><i></i><i></i><span>portal.dexdireccionygestion.com</span></div>
-          <img src="assets/portal-dex-score.jpg" width="906" height="352" alt="DEX Score en el Portal DEX: puntuación global de 75 sobre 100 en septiembre, con rentabilidad, agenda y producción y una recomendación para cada área">
+          <img src="assets/portal-dex-score.jpg" width="898" height="354" alt="DEX Score en el Portal DEX: puntuación global de 75 sobre 100 en septiembre, con rentabilidad, agenda y producción y una recomendación para cada área">
         </div>
-        <div class="hv-card hv-plan"><img src="assets/portal-plan-accion.jpg" width="846" height="280" alt="Plan de acción en el Portal DEX: tareas con estado, responsable, prioridad y fecha de vencimiento"></div>
         <span class="hv-tag hv-t1" aria-hidden="true">DEX Score mensual</span>
-        <span class="hv-tag hv-t2" aria-hidden="true">Plan de acción con fechas</span>
+        <div class="hv-planw">
+          <span class="hv-tag hv-t2" aria-hidden="true">Plan de acción con fechas</span>
+          <div class="hv-card hv-plan"><img src="assets/portal-plan-accion.jpg" width="1058" height="284" alt="Plan de acción en el Portal DEX: tareas con estado, responsable, prioridad y fecha de vencimiento"></div>
+        </div>
       </div>
       <figcaption><b>Portal DEX.</b> Tu clínica en un solo sitio: DEX Score, plan de acción, informes y comunicación con DEX.</figcaption>
       <div id="heroVideo"></div>
