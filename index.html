@@ -2282,7 +2282,7 @@ header.top{border-bottom:1px solid var(--band-line)}
       <nav class="f2-col f2-nav" aria-label="Pie de página"><h4>Explora</h4><ul><li><a href="#servicios">Qué hace DEX</a></li><li><a href="#metodo">Método</a></li><li><a href="#inversion-detalle">Inversión</a></li><li><a href="#autodiagnostico">Autodiagnóstico</a></li><li><a href="#preguntas">Preguntas</a></li><li><a href="#blog">Blog</a></li></ul></nav>
       <div class="f2-col"><h4>Legal</h4><ul><li><a href="#aviso-legal">Aviso legal</a></li><li><a href="#privacidad">Política de privacidad</a></li><li><a href="#cookies">Política de cookies</a></li></ul></div>
     </div>
-    <div class="f2-legal"><span id="legalLine"></span><button class="f2-theme" id="themeBtn" type="button">Cambiar tema</button></div>
+    <div class="f2-legal"><span id="legalLine"></span></div>
   </div>
 </footer>
 
@@ -2979,6 +2979,7 @@ function initNav(){
 }
 function initTheme(){
   const root = document.documentElement, b = $("#themeBtn");
+  if(!b){ try{ localStorage.removeItem("dex-theme"); }catch(e){} return; }  /* sin selector: la web sigue el tema del sistema */
   const label = () => b.textContent = { light:"Tema: claro", dark:"Tema: oscuro" }[root.dataset.theme] || "Tema: sistema";
   const saved = store.get("dex-theme"); if(saved==="light"||saved==="dark") root.dataset.theme = saved;
   b.addEventListener("click", () => {
@@ -3302,7 +3303,6 @@ function cookiesHTML(){
   <div class="post-table" role="region" aria-label="Datos guardados en tu navegador" tabindex="0"><table>
     <thead><tr><th>Nombre</th><th>Para qué</th><th>Tipo</th><th>Duración</th></tr></thead>
     <tbody>
-      <tr><td><code>dex-theme</code></td><td>Recordar si has elegido el tema claro u oscuro.</td><td>Propia · personalización elegida por ti</td><td>Hasta que la borres</td></tr>
       <tr><td><code>dex_autodiagnostico</code></td><td>Guardar el resultado de tu autodiagnóstico para que puedas adjuntarlo si reservas otro día. No sale de tu navegador salvo que lo adjuntes a una reserva.</td><td>Propia · funcional, solo si haces el autodiagnóstico</td><td>${esc(String(DIAG_DIAS))} días</td></tr>
       ${A ? `<tr><td><code>dex-consent</code></td><td>Recordar si has aceptado o rechazado la analítica.</td><td>Propia · técnica</td><td>12 meses</td></tr>` : ""}
     </tbody></table></div>
