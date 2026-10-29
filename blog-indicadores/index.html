@@ -8,6 +8,7 @@
 <meta property="og:url" content="https://dexdireccionygestion.com/blog-indicadores/">
 <meta property="og:image" content="https://dexdireccionygestion.com/assets/dex-icono-512.png">
 <meta name="theme-color" content="#F4F1EA">
+<meta name="color-scheme" content="only light">
 <meta name="description" content="El programa de gestión de cualquier clínica guarda más datos de los que nadie mira. No hace falta mirarlos todos. Con ocho indicadores revisados cada mes…">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
@@ -56,14 +57,8 @@
   --w:1200px;
   --gutter:clamp(16px,4vw,40px);
   --s-section:clamp(72px,10vw,140px);
-  color-scheme:light;
+  color-scheme:only light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#0B0B0D;--paper-2:#161618;--ink:#F8F8F6;--ink-2:#B5B5BA;--ink-3:#88888E;--line:rgba(248,248,246,.13);
-  --taupe:#C9C9CC;--brass:#C9C9CC;--band:#121214;--band-3:#1C1C1F;--band-fg:#F8F8F6;--band-2:#A9A9AE;--band-line:rgba(248,248,246,.14);--band-acc:#C9C9CC;--ok:#7FB08F;--warn:#E09A6C;color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#0B0B0D;--paper-2:#161618;--ink:#F8F8F6;--ink-2:#B5B5BA;--ink-3:#88888E;--line:rgba(248,248,246,.13);
-  --taupe:#C9C9CC;--brass:#C9C9CC;--band:#121214;--band-3:#1C1C1F;--band-fg:#F8F8F6;--band-2:#A9A9AE;--band-line:rgba(248,248,246,.14);--band-acc:#C9C9CC;--ok:#7FB08F;--warn:#E09A6C;color-scheme:dark}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -1385,8 +1380,6 @@ header.top{border-bottom:1px solid var(--band-line)}
 
 /* ===== Diferenciar bloques: ritmo de fondos y separadores ===== */
 :root{--sand:#ECE7DC;--white:#FFFFFF}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sand:#141416;--white:#0F0F11}}
-:root[data-theme="dark"]{--sand:#141416;--white:#0F0F11}
 #home > section{position:relative;border-top:1px solid var(--line)}
 #home > section.hero{border-top:0}
 #problema{background:var(--white)}
