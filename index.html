@@ -1430,6 +1430,18 @@ header.top{border-bottom:1px solid var(--band-line)}
 #quickSlots > .quick-slots .qs{min-width:0}
 .qs-more{text-align:center;justify-items:center;padding-inline:8px}
 @media (max-width:560px){#quickSlots > .quick-slots{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ===== Reserva con la agenda real de Jose ===== */
+.steps-real{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:14px;counter-reset:st}
+.steps-real li{position:relative;padding-left:44px;display:grid;gap:2px;counter-increment:st}
+.steps-real li::before{content:counter(st);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-weight:600;font-size:.9rem}
+.steps-real b{font-weight:600}
+.steps-real span{font-size:.9rem;color:var(--ink-2)}
+#quick.agenda-real #quickSlots{display:block}
+.bk-tips{margin:0;padding-left:1.1em;display:grid;gap:6px;font-size:.92rem;color:var(--ink-2)}
+
+@media (min-width:861px){#contacto .book-card #booking{grid-column:2;grid-row:1;align-self:start}}
+#booking .form-state.ok{margin:0}
 </style>
 
 </head>
@@ -2340,7 +2352,7 @@ const CONFIG = {
      url: enlace de reserva real (Google Calendar, Calendly…). Si se rellena, el paso 2 abre ese calendario.
      Vacío = selector propio; la cita se envía como solicitud y DEX la confirma. Horas siempre en hora de Madrid. */
   booking: {
-    url: "",                                               // [PENDIENTE]
+    url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1_Kj4iHs_FCSsyS0xB2yHaWgu-Uw0VuNAlB6cUgd5hRD3F-hP_XqIem6Ktf3cyCJGGj-Z-FTea", // [CONFIRMADO] agenda de citas «Café con DEX» de Google Calendar (Jose): L–V 8:30–13:00 y 14:00–17:00, 30 min, 30 min entre citas, 24 h de antelación
     titulo: "Videollamada-café con DEX",
     duracionMin: 30,                                       // [PROVISIONAL]
     dias: [1,2,3,4,5],                                     // lunes a viernes [PROVISIONAL]
@@ -2418,9 +2430,9 @@ const CONFIG = {
       { servicio:"Alojamiento de la web", nombre:"Netlify, Inc.", ubicacion:"" },
       { servicio:"Correo electrónico", nombre:"", ubicacion:"" },
       { servicio:"Envío de formularios por correo", nombre:"Netlify, Inc. (Netlify Forms)", ubicacion:"" },
-      { servicio:"Calendario y videollamada", nombre:"", ubicacion:"" }
+      { servicio:"Agenda de citas y videollamada", nombre:"Google (Google Workspace: Calendar y Meet)", ubicacion:"" }
     ],
-    terceros: []                                           // p. ej. { nombre:"Calendly", uso:"agenda de citas; instala cookies propias, solo con tu consentimiento." }
+    terceros: [{ nombre:"Google Calendar (agenda de citas)", uso:"la reserva de la hora se hace en la página de citas de Google, que se abre en una pestaña nueva; esta web no carga sus cookies. Allí se aplican las condiciones y la política de privacidad de Google." }]                                           // p. ej. { nombre:"Calendly", uso:"agenda de citas; instala cookies propias, solo con tu consentimiento." }
   },
   /* Envío de formularios por correo a DEX.
      "netlify": Netlify Forms (la web alojada en Netlify). El aviso por correo a "destino" se configura en
@@ -2742,9 +2754,10 @@ function mailFields(d){
     o["Prioridades"] = (d.prioridades||[]).join(", ");
     o["Áreas"] = (d.areas||[]).map(a => `${a.area}: ${a.estado} — ${a.respuesta}`).join("\n");
   } else {
-    const cuando = d.cita ? d.cita : "Prefiere que le llamemos para fijar la cita";
-    o._subject = `${d.cita ? "Nueva reserva de café" : "Petición de llamada"} · ${d.clinica || d.nombre}${d.cita ? " · " + d.cita : ""}`;
-    o["Tipo"] = d.cita ? "Reserva de videollamada-café (30 min)" : "Petición de llamada";
+    const previo = d.tipo === "lead";
+    const cuando = d.cita ? d.cita : previo ? "Está eligiendo hora en la agenda de citas de Google Calendar" : "Prefiere que le llamemos para fijar la cita";
+    o._subject = `${d.cita ? "Nueva reserva de café" : previo ? "Nuevo café: datos de la clínica" : "Petición de llamada"} · ${d.clinica || d.nombre}${d.cita ? " · " + d.cita : ""}`;
+    o["Tipo"] = d.cita ? "Reserva de videollamada-café (30 min)" : previo ? "Datos previos a la reserva (la hora llega por Google Calendar)" : "Petición de llamada";
     o["Día y hora"] = cuando;
     o["Nombre"] = d.nombre; o["Clínica"] = d.clinica;
     if(d.telefono) o["Teléfono"] = d.telefono;
@@ -2795,7 +2808,7 @@ function initForm(){
     if(CONFIG.form.endpoint && CONFIG.booking.url){
       btn.disabled = true; const label = btn.innerHTML; btn.textContent = "Guardando tus datos…";
       try{ await post({tipo:"lead", ...LEAD}); track("form_success"); }
-      catch(err){ track("form_error"); st.innerHTML = `<div class="form-state bad"><p><b>No se han podido enviar tus datos.</b> Revisa tu conexión y vuelve a intentarlo, o escríbenos a <b style="user-select:all">${esc(CONFIG.contacto.email)}</b>.</p></div>`; btn.disabled = false; btn.innerHTML = label; return; }
+      catch(err){ track("form_error"); LEAD._noEnviado = true; }
       btn.disabled = false; btn.innerHTML = label;
     }
     if(CONFIG.booking.url){ openBooking(); return; }
@@ -2838,7 +2851,14 @@ function fallbackChannels(msg){
 let PRE = null;
 function setStep(){}
 function renderQuickSlots(){
-  const q = $("#quick"); if(!q || CONFIG.booking.url) return;
+  const q = $("#quick"); if(!q) return;
+  if(CONFIG.booking.url){
+    q.hidden = false; q.classList.add("agenda-real");
+    $("#quickLbl").textContent = "Cómo se reserva";
+    $("#quickSlots").innerHTML = `<ol class="steps-real"><li><b>Tus datos</b><span>Y tu autodiagnóstico, si lo hiciste.</span></li><li><b>Eliges día y hora</b><span>En la agenda real de Jose: solo verás huecos libres.</span></li><li><b>Recibes la invitación</b><span>Con el enlace de Google Meet y un recordatorio.</span></li></ol>`;
+    $("#leadLbl").textContent = "Continuar y elegir hora";
+    return;
+  }
   const days = bookingDays().filter(d => slotsFor(d).length); if(!days.length) return;
   q.hidden = false;
   let more = false, selDay = 0;
@@ -2890,8 +2910,11 @@ function openBooking(){
   const box = $("#booking"), B = CONFIG.booking, first = esc(LEAD.nombre.split(" ")[0]);
   $("#leadForm").hidden = true; box.hidden = false; setStep(2); track("booking_open");
   if(B.url){
-    box.innerHTML = bkHead() + `<p>Gracias, ${first}. Elige el hueco que mejor te venga en el calendario de DEX. Recibirás la invitación con el enlace de la videollamada en tu correo.</p>
-      <p><a class="btn" href="${esc(B.url)}" target="_blank" rel="noopener" data-track="booking_external">Abrir el calendario de citas <span class="arr" aria-hidden="true">→</span></a></p>
+    const ad = LEAD.autodiagnostico && LEAD.autodiagnostico.id;
+    box.innerHTML = bkHead() + `<div class="form-state ok"><p><b>${LEAD._noEnviado ? "Último paso" : "Datos recibidos"}, ${first}.</b> Ahora elige el día y la hora en la agenda de Jose. Solo verás huecos libres.</p></div>
+      <p><a class="btn" href="${esc(B.url)}" target="_blank" rel="noopener" data-track="booking_external">Abrir la agenda y elegir hora <span class="arr" aria-hidden="true">→</span></a></p>
+      <ul class="bk-tips"><li>Usa el mismo correo${LEAD.email ? ` (<b>${esc(LEAD.email)}</b>)` : ""} para que juntemos tu reserva con tus datos.</li>${ad ? `<li>En «Código del autodiagnóstico» escribe <b style="user-select:all">${esc(ad)}</b>.</li>` : ""}<li>La agenda se abre en una pestaña nueva de Google Calendar.</li></ul>
+      ${LEAD._noEnviado ? `<p class="micro">No hemos podido guardar tus datos desde la web, pero puedes reservar igualmente; los pediremos en la agenda.</p>` : ""}
       <div class="bk-alt"><button type="button" class="txtbtn" id="bkBack">Volver a mis datos</button></div>`;
   } else {
     const days = bookingDays().filter(d => slotsFor(d).length);
