@@ -64,7 +64,8 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.nw{white-space:nowrap}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img,video{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--taupe);outline-offset:3px;border-radius:2px}
@@ -1681,7 +1682,7 @@ header.top{border-bottom:1px solid var(--band-line)}
         <details class="more">
           <summary>Cuéntanos más sobre tu clínica (opcional)</summary>
           <div class="grid2">
-            <div class="f"><label for="l_role">Cargo</label><select id="l_role" name="cargo"><option value="">Selecciona</option><option>Propietario/a</option><option>Director/a médico</option><option>Gerente o coordinador/a</option><option>Otro</option></select></div>
+            <div class="f"><label for="l_role">Cargo</label><select id="l_role" name="cargo"><option value="">Selecciona</option><option>Propietario/a</option><option>Director/a médico/a</option><option>Gerente o coordinador/a</option><option>Otro</option></select></div>
             <div class="f"><label for="l_size">Gabinetes</label><select id="l_size" name="gabinetes"><option value="">Selecciona</option><option>1–2</option><option>3–4</option><option>5–7</option><option>8 o más</option><option>Varias clínicas</option></select></div>
           </div>
           <div class="grid2">
@@ -1692,7 +1693,7 @@ header.top{border-bottom:1px solid var(--band-line)}
         </details>
         <div class="diag-attach" id="diagAttach" hidden></div>
         <div class="hp" aria-hidden="true"><label for="l_web">No rellenar</label><input id="l_web" name="web" tabindex="-1" autocomplete="off"></div>
-        <label class="check" for="l_priv"><input id="l_priv" type="checkbox" name="privacidad" required><span>He leído y acepto la <button type="button" class="inline-link" data-dialog="dlgPrivacy">política de privacidad</button>.</span></label>
+        <label class="check" for="l_priv"><input id="l_priv" type="checkbox" name="privacidad" required><span>He leído y acepto la <span class="nw"><button type="button" class="inline-link" data-dialog="dlgPrivacy">política de privacidad</button>.</span></span></label>
         <span class="err" id="e_priv"></span>
         <button class="btn btn-block" type="submit" id="leadSubmit"><span id="leadLbl">Reservar mi café</span> <span class="arr" aria-hidden="true">→</span></button>
         <p class="lg-mini">Responsable: DEX Dirección y Gestión SL. Usamos tus datos solo para gestionar tu reserva y preparar el café. No los cedemos. Puedes ejercer tus derechos escribiéndonos. <button type="button" class="inline-link" data-dialog="dlgPrivacy">Más información</button></p>
@@ -2244,9 +2245,9 @@ header.top{border-bottom:1px solid var(--band-line)}
     <h3>Cinco preguntas para decidir</h3>
     <ol>
       <li><b>¿Qué necesitas resolver?</b> Si es el día a día operativo, un gerente. Si es el rumbo, los objetivos y el método, una dirección externa puede bastar.</li>
-      <li><b>¿Cuánta gestión diaria hay?</b> Una persona a tiempo completo tiene que tener trabajo de gestión para toda la jornada.</li>
+      <li><b>¿Cuánta gestión diaria hay?</b> Para justificar a una persona a tiempo completo, tiene que haber trabajo de gestión para toda la jornada.</li>
       <li><b>¿Cuánto puedes invertir?</b> Calcula el coste empresa completo, no solo el salario bruto.</li>
-      <li><b>¿Tienes a alguien que coordine?</b> Si ya hay una buena coordinación, a menudo lo que falta es dirección por encima, no otra persona más.</li>
+      <li><b>¿Tienes a alguien que coordine?</b> Si ya hay una buena coordinación, a menudo lo que falta es dirección por encima, no otra persona.</li>
       <li><b>¿Cómo vas a medir el resultado?</b> En los dos casos, con indicadores y objetivos escritos desde el primer mes.</li>
     </ol>
 
@@ -2352,7 +2353,7 @@ const CONFIG = {
      url: enlace de reserva real (Google Calendar, Calendly…). Si se rellena, el paso 2 abre ese calendario.
      Vacío = selector propio; la cita se envía como solicitud y DEX la confirma. Horas siempre en hora de Madrid. */
   booking: {
-    url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1_Kj4iHs_FCSsyS0xB2yHaWgu-Uw0VuNAlB6cUgd5hRD3F-hP_XqIem6Ktf3cyCJGGj-Z-FTea", // [CONFIRMADO] agenda de citas «Café con DEX» de Google Calendar (Jose): L–V 8:30–13:00 y 14:00–17:00, 30 min, 30 min entre citas, 24 h de antelación
+    url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1_Kj4iHs_FCSsyS0xB2yHaWgu-Uw0VuNAlB6cUgd5hRD3F-hP_XqIem6Ktf3cyCJGGj-Z-FTea?hl=es", // [CONFIRMADO] (hl=es: página de reserva siempre en español) agenda de citas «Café con DEX» de Google Calendar (Jose): L–V 8:30–13:00 y 14:00–17:00, 30 min, 30 min entre citas, 24 h de antelación
     titulo: "Videollamada-café con DEX",
     duracionMin: 30,                                       // [PROVISIONAL]
     dias: [1,2,3,4,5],                                     // lunes a viernes [PROVISIONAL]
@@ -2418,7 +2419,7 @@ const CONFIG = {
      Vacío = el formulario valida y prepara el mensaje, y se muestra cómo enviarlo por correo, teléfono o WhatsApp. */
   /* Textos legales (aviso legal, privacidad y cookies). Lo vacío se muestra como [pendiente] en la web. */
   legal: {
-    actualizado: "26 de octubre de 2026",
+    actualizado: "29 de octubre de 2026",
     dominio: "dexdireccionygestion.com",              // [CONFIRMADO]
     jurisdiccion: "",                                      // [PENDIENTE] ciudad del domicilio social, p. ej. "Madrid"
     emailPrivacidad: "",                                   // [OPCIONAL] vacío = se usa contacto.email
@@ -2427,10 +2428,10 @@ const CONFIG = {
     conservacionMeses: 12,                                 // [PROVISIONAL] reservas y consultas sin contratación
     fuentesPropias: false,                                 // true cuando las tipografías se alojen en el propio dominio
     proveedores: [                                         // [PENDIENTE] completar al conectar los servicios
-      { servicio:"Alojamiento de la web", nombre:"Netlify, Inc.", ubicacion:"" },
-      { servicio:"Correo electrónico", nombre:"", ubicacion:"" },
-      { servicio:"Envío de formularios por correo", nombre:"Netlify, Inc. (Netlify Forms)", ubicacion:"" },
-      { servicio:"Agenda de citas y videollamada", nombre:"Google (Google Workspace: Calendar y Meet)", ubicacion:"" }
+      { servicio:"Alojamiento de la web", nombre:"Netlify, Inc.", ubicacion:"Estados Unidos (adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
+      { servicio:"Correo electrónico", nombre:"Google (Google Workspace: Gmail)", ubicacion:"UE y otros países (Google Ireland Ltd.; Google LLC adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
+      { servicio:"Envío de formularios por correo", nombre:"Netlify, Inc. (Netlify Forms)", ubicacion:"Estados Unidos (adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
+      { servicio:"Agenda de citas y videollamada", nombre:"Google (Google Workspace: Calendar y Meet)", ubicacion:"UE y otros países (Google Ireland Ltd.; Google LLC adherida al Marco de Privacidad de Datos UE-EE. UU.)" }
     ],
     terceros: [{ nombre:"Google Calendar (agenda de citas)", uso:"la reserva de la hora se hace en la página de citas de Google, que se abre en una pestaña nueva; esta web no carga sus cookies. Allí se aplican las condiciones y la política de privacidad de Google." }]                                           // p. ej. { nombre:"Calendly", uso:"agenda de citas; instala cookies propias, solo con tu consentimiento." }
   },
@@ -3345,7 +3346,7 @@ function cookiesHTML(){
   <p><button type="button" class="btn btn-ghost" id="lgClear">Borrar mis datos guardados en este navegador</button> <span class="lg-cleared" id="lgCleared" role="status"></span></p>
   <p>También puedes borrarlos o bloquearlos desde la configuración de tu navegador: <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.mozilla.org/es/kb/Borrar%20cookies" target="_blank" rel="noopener">Firefox</a> o <a href="https://support.microsoft.com/es-es/microsoft-edge" target="_blank" rel="noopener">Edge</a>.</p>
   <h3>5. Cambios</h3>
-  <p>Si en el futuro incorporamos analítica, un calendario externo o vídeos de otras plataformas, actualizaremos esta política y te pediremos el consentimiento antes de usar cualquier cookie que lo necesite, con la opción de rechazarla tan fácil como aceptarla.</p>
+  <p>Si en el futuro incorporamos analítica o vídeos de otras plataformas, actualizaremos esta política y te pediremos el consentimiento antes de usar cualquier cookie que lo necesite, con la opción de rechazarla tan fácil como aceptarla.</p>
   <p>Más información sobre el tratamiento de tus datos en la <a href="/privacidad/">política de privacidad</a>.</p>
   <p class="lg-date">Última actualización: ${d.fecha}.</p>`;
 }
