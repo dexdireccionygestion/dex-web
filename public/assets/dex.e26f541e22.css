@@ -1407,6 +1407,16 @@ header.top{border-bottom:1px solid var(--band-line)}
 @media (min-width:861px){#contacto .book-card #booking{grid-column:2;grid-row:1;align-self:start}}
 #booking .form-state.ok{margin:0}
 
+
+/* Embudo: bloque intermedio de los artículos hacia el autodiagnóstico */
+.post-diag{margin:2.4em 0;padding:24px 26px;border:1px solid var(--line,#d8d2c6);border-left:3px solid var(--ink);border-radius:12px;background:var(--paper-2)}
+.post-diag .pd-t{margin:0 0 .3em;font-family:var(--f-display);font-size:1.3rem;line-height:1.25}
+.post-diag .pd-s{margin:0 0 1em;color:var(--ink-2)}
+.post-diag .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.post-diag .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+/* Resultado del autodiagnóstico: lectura recomendada por prioridad */
+.dr-pri .dr-read{display:block;margin-top:4px;font-size:.92rem}
+.ds-check2{margin-top:6px}
 /* Agenda de Google integrada en el paso 2 de la reserva */
 .bk-embed{border:1px solid color-mix(in srgb,currentColor 18%,transparent);border-radius:14px;overflow:hidden;background:#fff;margin:14px 0 10px}
 .bk-embed iframe{display:block;width:100%;height:680px;border:0}

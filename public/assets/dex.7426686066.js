@@ -1,4 +1,4 @@
-window.DEX_PAGES = ["autodiagnostico", "aviso-legal", "blog", "blog-agenda", "blog-facturacion", "blog-gabinete", "blog-gerente", "blog-indicadores", "blog-presupuestos", "blog-protocolos", "consultoria-clinicas-dentales", "cookies", "inversion-detalle", "metodo", "preguntas", "privacidad"];
+window.DEX_PAGES = ["autodiagnostico", "aviso-legal", "blog", "blog-agenda", "blog-captacion", "blog-cierre-mes", "blog-equipo", "blog-facturacion", "blog-gabinete", "blog-gerente", "blog-indicadores", "blog-presupuestos", "blog-protocolos", "consultoria-clinicas-dentales", "cookies", "inversion-detalle", "metodo", "preguntas", "privacidad"];
 /* =====================================================================
    CONFIG DEX · todo el contenido variable se edita aquí.
    Estados:  [CONFIRMADO] dato dado por DEX · [PROVISIONAL] supuesto o texto a validar · [PENDIENTE] falta el dato
@@ -88,6 +88,17 @@ const CONFIG = {
     { area:"Captación y marketing", gana:"Que cada euro de marketing tenga un objetivo y una medición.", q:"¿Sabes qué canal te trae pacientes nuevos y a qué coste?", ops:["No lo sé","Invertimos, pero sin medir","Lo sé a grandes rasgos","Sí, por canal y coste por paciente"] },
     { area:"Costes, caja y herramientas", gana:"Más control sobre la rentabilidad real de la clínica.", q:"¿Revisas cada mes los costes de laboratorio, el cierre de caja y los márgenes?", ops:["Nunca","Solo cuando algo falla","Algunas cosas","Sí, todo cada mes"] }
   ],
+  /* Lectura recomendada para cada área del autodiagnóstico (en el resultado y en el informe por correo). */
+  lecturas: {
+    "Diagnóstico y datos": ["blog-gabinete", "Facturación por gabinete: cómo calcularla y qué hacer con el dato"],
+    "Objetivos y cuadro de mando": ["blog-indicadores", "Los 8 indicadores que todo propietario debería revisar cada mes"],
+    "Equipo y organización": ["blog-equipo", "Funciones y responsables: el organigrama que evita que todo pase por ti"],
+    "Protocolos por puesto": ["blog-protocolos", "Protocolos por puesto: cómo escribirlos para que se cumplan"],
+    "Experiencia del paciente": ["blog-agenda", "Huecos y cancelaciones: cómo recuperar el control de la agenda"],
+    "Primeras visitas y presupuestos": ["blog-presupuestos", "Cómo mejorar la aceptación de presupuestos en tu clínica dental"],
+    "Captación y marketing": ["blog-captacion", "Marketing para clínicas dentales: cómo saber qué canal te trae pacientes y a qué coste"],
+    "Costes, caja y herramientas": ["blog-cierre-mes", "El cierre de mes de una clínica dental: qué revisar y en qué orden"]
+  },
   /* Calculadora "Lo que se escapa": valores de ejemplo [PROVISIONAL] */
   fuga: { huecosSemana:4, valorHora:120, presupuestosMes:6, importeMedio:900, semanasAnio:44, recuperable:25 },
   /* Acciones de temporada por mes natural (0 = enero). Se suman al mes del plan que caiga en ese mes. */
@@ -124,6 +135,8 @@ const CONFIG = {
     proveedores: [                                         // [PENDIENTE] completar al conectar los servicios
       { servicio:"Alojamiento de la web", nombre:"Netlify, Inc.", ubicacion:"Estados Unidos (adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
       { servicio:"Correo electrónico", nombre:"Google (Google Workspace: Gmail)", ubicacion:"UE y otros países (Google Ireland Ltd.; Google LLC adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
+      // Al activar el envío automático del informe, añadir aquí el proveedor elegido, p. ej.:
+      // { servicio:"Envío del informe del autodiagnóstico y de los artículos", nombre:"Sendinblue SAS (Brevo)", ubicacion:"Unión Europea (Francia)" },
       { servicio:"Envío de formularios por correo", nombre:"Netlify, Inc. (Netlify Forms)", ubicacion:"Estados Unidos (adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
       { servicio:"Agenda de citas y videollamada", nombre:"Google (Google Workspace: Calendar y Meet)", ubicacion:"UE y otros países (Google Ireland Ltd.; Google LLC adherida al Marco de Privacidad de Datos UE-EE. UU.)" }
     ],
@@ -138,7 +151,9 @@ const CONFIG = {
     destino: "jrodriguez@dexdireccionygestion.com",       // [CONFIRMADO] a dónde llegan reservas y autodiagnósticos
     alias: "",                                             // solo FormSubmit: alias aleatorio tras activar
     get endpoint(){ return this.proveedor === "netlify" ? "/" : "https://formsubmit.co/ajax/" + (this.alias || this.destino); },
-    minSegundos: 3
+    minSegundos: 3,
+    /* true cuando esté configurado el envío automático del informe (función de Netlify + Brevo o Resend). Ver README. */
+    informeAuto: false
   },                    // [PENDIENTE]
   /* Analítica: desactivada. Activar solo con banner de consentimiento configurado. */
   analytics: { enabled:false }
@@ -456,6 +471,8 @@ function mailFields(d){
     o["Código"] = d.autodiagnosticoId; o["Puntuación"] = `${d.puntuacion}/100 · ${d.nivel}`;
     o["Prioridades"] = (d.prioridades||[]).join(", ");
     o["Áreas"] = (d.areas||[]).map(a => `${a.area}: ${a.estado} — ${a.respuesta}`).join("\n");
+    o["Quiere artículos mensuales"] = d.novedades ? "Sí" : "No";
+    o["Datos del informe"] = JSON.stringify({ id:d.autodiagnosticoId, puntuacion:d.puntuacion, nivel:d.nivel, prioridades:d.prioridades, areas:(d.areas||[]).map(a => ({ area:a.area, valor:a.valor, estado:a.estado, respuesta:a.respuesta })) });
   } else {
     const previo = d.tipo === "lead";
     const cuando = d.cita ? d.cita : previo ? "Está eligiendo hora en la agenda de citas de Google Calendar" : "Prefiere que le llamemos para fijar la cita";
@@ -480,7 +497,8 @@ function mailFields(d){
 const NF_KEYS = { "Tipo":"tipo", "Día y hora":"dia_y_hora", "Nombre":"nombre", "Clínica":"clinica", "Teléfono":"telefono", "Correo":"correo",
   "Cargo":"cargo", "Gabinetes":"gabinetes", "Necesidad principal":"necesidad", "Provincia":"provincia", "Nivel de interés":"nivel_de_interes",
   "Mensaje":"mensaje", "Marcó en «¿Te pasa esto?»":"te_pasa_esto", "Autodiagnóstico":"autodiagnostico", "Prioridades":"prioridades",
-  "Ficha de la clínica":"ficha_de_la_clinica", "Código":"codigo", "Puntuación":"puntuacion", "Áreas":"areas", "Enviado desde":"enviado_desde" };
+  "Ficha de la clínica":"ficha_de_la_clinica", "Código":"codigo", "Puntuación":"puntuacion", "Áreas":"areas", "Enviado desde":"enviado_desde",
+  "Quiere artículos mensuales":"novedades", "Datos del informe":"datos_informe" };
 async function post(data){
   const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 12000), m = mailFields(data);
   try{
@@ -800,13 +818,14 @@ function initDiag(){
     root.innerHTML = `<div class="dr-head"><div class="dr-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--paper-2)" stroke-width="10"/><circle cx="60" cy="60" r="52" fill="none" stroke="var(--brass)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C*score/100} ${C}" transform="rotate(-90 60 60)"/></svg><div><b>${score}</b><span>de 100</span></div></div>
         <div><p class="eyebrow">Tu resultado orientativo</p><h2 tabindex="-1">${esc(lvl)}</h2><p class="dr-sub">${esc(lvlTxt)}</p></div></div>
       <div class="dr-areas">${Q.map((q,k)=>{ const [t,c] = status(ans[k]); return `<div class="dr-row"><span class="dr-name">${esc(q.area)}</span><span class="dr-track" aria-hidden="true"><i style="width:${(ans[k]+1)/4*100}%"></i></span><em class="${c}">${t}</em></div>`; }).join("")}</div>
-      <div class="dr-pri"><p class="eyebrow">Por dónde empezaríamos</p><ol>${pri.map(x=>`<li><b>${esc(x.q.area)}.</b> ${esc(x.q.gana)}</li>`).join("")}</ol></div>
+      <div class="dr-pri"><p class="eyebrow">Por dónde empezaríamos</p><ol>${pri.map(x=>{ const r = CONFIG.lecturas[x.q.area]; return `<li><b>${esc(x.q.area)}.</b> ${esc(x.q.gana)}${r ? ` <a class="link dr-read" href="${REAL_PATHS ? "/" + r[0] + "/" : "#" + r[0]}" data-track="diag_read">Lee: ${esc(r[1])} →</a>` : ""}</li>`; }).join("")}</ol></div>
       <div class="dr-cta"><a class="btn btn-2l" id="dqBook" href="/#contacto" data-track="cta_diag_result"><span class="b-main">Revisarlo en un café de 30 min <span class="arr" aria-hidden="true">→</span></span>${ns?`<span class="b-sub"><span class="pulse" aria-hidden="true"></span>Próximo hueco libre: <b>${esc(ns.lab)}</b></span>`:""}</a>
         <button type="button" class="txtbtn" id="dqAgain">Repetir el autodiagnóstico</button></div>
       <form class="dr-send" id="drSend" novalidate>
-        <div class="ds-txt"><p class="ds-t">¿Aún no quieres llamar? Recibe tu resultado por correo.</p><p class="ds-s">Tu puntuación, tus áreas prioritarias y qué hacer en cada una, para revisarlo con calma.</p></div>
+        <div class="ds-txt"><p class="ds-t">¿Aún no quieres llamar? Recibe tu informe completo por correo.</p><p class="ds-s">Tu puntuación, tus prioridades, qué hacer este mes en cada una y qué leer para empezar.</p></div>
         <div class="ds-row"><label class="sr" for="ds_email">Tu correo electrónico</label><input id="ds_email" type="email" autocomplete="email" placeholder="nombre@clinica.es" required><button class="btn" type="submit">Enviármelo</button></div>
-        <label class="check ds-check" for="ds_priv"><input id="ds_priv" type="checkbox" required><span>Acepto la <button type="button" class="inline-link" data-dialog="dlgPrivacy">política de privacidad</button>. Sin envíos comerciales.</span></label>
+        <label class="check ds-check" for="ds_priv"><input id="ds_priv" type="checkbox" required><span>Acepto la <button type="button" class="inline-link" data-dialog="dlgPrivacy">política de privacidad</button>.</span></label>
+        <label class="check ds-check ds-check2" for="ds_news"><input id="ds_news" type="checkbox"><span>Además, quiero recibir un artículo práctico al mes. Puedes darte de baja cuando quieras.</span></label>
         <p class="err" id="ds_err" role="alert"></p>
       </form>
       <p class="micro">Si reservas, puedes adjuntar tus respuestas a la solicitud para preparar el café. Guardamos el resultado solo en este navegador durante ${DIAG_DIAS} días. <button type="button" class="inline-link" id="dqForget">Borrarlo</button></p>`;
@@ -865,12 +884,13 @@ function initDiagSend(score, lvl, pri){
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ err.textContent = "Escribe un correo válido, por ejemplo nombre@clinica.es."; $("#ds_email").focus(); return; }
     if(!$("#ds_priv").checked){ err.textContent = "Acepta la política de privacidad para enviarte el resultado."; return; }
     err.textContent = "";
+    const news = !!($("#ds_news") && $("#ds_news").checked);
     DIAG.email = em; saveDiag();
     const lc = $("#l_contact"); if(lc && !lc.value) lc.value = em;
     track("diag_email");
     const body = diagReport(score, lvl, pri);
-    if(CONFIG.form.endpoint) post({tipo:"autodiagnostico", autodiagnosticoId:DIAG.id, email:em, areas:DIAG.areas, puntuacion:score, nivel:lvl, prioridades:DIAG.prioridades, respuestas:DIAG.respuestas, origen:"web-dex", fecha:new Date().toISOString()}).catch(() => {});
-    form.innerHTML = `<div class="ds-ok"><p><b>Tu resultado está listo.</b> Ábrelo en tu correo para guardarlo en <b>${esc(em)}</b>, o cópialo.</p>
+    if(CONFIG.form.endpoint) post({tipo:"autodiagnostico", autodiagnosticoId:DIAG.id, email:em, areas:DIAG.areas, puntuacion:score, nivel:lvl, prioridades:DIAG.prioridades, respuestas:DIAG.respuestas, novedades:news, origen:"web-dex", fecha:new Date().toISOString()}).catch(() => {});
+    form.innerHTML = `<div class="ds-ok">${CONFIG.form.informeAuto ? `<p><b>Te lo hemos enviado a ${esc(em)}.</b> Si no lo ves en unos minutos, mira en la carpeta de spam o de promociones. También puedes copiarlo aquí:</p>` : `<p><b>Tu resultado está listo.</b> Ábrelo en tu correo para guardarlo en <b>${esc(em)}</b>, o cópialo.</p>`}
       <pre>${esc(body)}</pre>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="copy" style="text-decoration:none" href="mailto:${esc(em)}?subject=${encodeURIComponent("Tu autodiagnóstico DEX · "+score+"/100")}&body=${encodeURIComponent(body)}">Abrir en mi correo</a><button type="button" class="copy" data-copy="${esc(body)}">Copiar resultado</button></div></div>`;
   });
@@ -984,7 +1004,7 @@ function privacidadHTML(){
   <ul>
     <li><b>Al reservar el café:</b> nombre y apellidos, nombre de la clínica, teléfono o correo y el día y la hora que eliges. Si quieres, también cargo, número de gabinetes, principal necesidad, provincia, un mensaje y el nivel de servicio que te interesa.</li>
     <li><b>Si adjuntas tu autodiagnóstico:</b> tus respuestas a las 8 preguntas, la puntuación orientativa, las áreas prioritarias y las casillas que hayas marcado en «¿Te pasa esto?». Puedes desmarcar la casilla «Adjuntar mi autodiagnóstico» antes de enviar.</li>
-    <li><b>Si pides el resultado del autodiagnóstico por correo:</b> tu correo electrónico y el resultado.</li>
+    <li><b>Si pides el informe del autodiagnóstico por correo:</b> tu correo electrónico, tus respuestas y el resultado. Si además marcas la casilla de artículos mensuales, guardamos tu correo para enviártelos.</li>
     <li><b>Si nos escribes o nos llamas</b> por correo, teléfono${CONFIG.contacto.whatsapp ? " o WhatsApp" : ""}: los datos de contacto y lo que nos cuentes.</li>
     <li><b>Si contratas:</b> los datos de la clínica y de sus responsables necesarios para el contrato y la facturación.</li>
   </ul>
@@ -995,16 +1015,18 @@ function privacidadHTML(){
     <tbody>
       <tr><td>Gestionar tu reserva o tu petición de llamada, confirmarte la cita y preparar la reunión.</td><td>Aplicación de medidas precontractuales a petición tuya (art. 6.1.b RGPD).</td></tr>
       <tr><td>Usar tu autodiagnóstico adjunto y los datos opcionales para conocer la situación de partida de tu clínica.</td><td>Tu consentimiento (art. 6.1.a RGPD), que das al adjuntarlos y puedes retirar cuando quieras.</td></tr>
-      <tr><td>Enviarte el resultado del autodiagnóstico a tu correo.</td><td>Tu consentimiento (art. 6.1.a RGPD).</td></tr>
+      <tr><td>Enviarte el informe del autodiagnóstico a tu correo.</td><td>Tu consentimiento (art. 6.1.a RGPD).</td></tr>
+      <tr><td>Si lo marcas, enviarte un artículo práctico al mes sobre la gestión de clínicas dentales.</td><td>Tu consentimiento expreso (art. 6.1.a RGPD y art. 21 LSSI-CE). Puedes darte de baja en cualquier momento desde el propio correo o escribiéndonos.</td></tr>
       <tr><td>Responder a tus consultas por correo${CONFIG.contacto.whatsapp ? ", teléfono o WhatsApp" : " o teléfono"}.</td><td>Tu consentimiento y, si preguntas por nuestros servicios, medidas precontractuales (art. 6.1.a y 6.1.b RGPD).</td></tr>
       <tr><td>Si contratas: prestar el servicio, facturar y cumplir nuestras obligaciones fiscales y mercantiles.</td><td>Ejecución del contrato y cumplimiento de obligaciones legales (art. 6.1.b y 6.1.c RGPD).</td></tr>
     </tbody></table></div>
-  <p><b>No te enviaremos comunicaciones comerciales</b> (boletines, ofertas o campañas) salvo que nos des tu consentimiento expreso para ello por separado, como exige el artículo 21 de la LSSI-CE.</p>
+  <p><b>No te enviaremos comunicaciones comerciales</b> (boletines, ofertas o campañas) salvo que nos des tu consentimiento expreso para ello por separado, como exige el artículo 21 de la LSSI-CE: por ejemplo, marcando la casilla de artículos mensuales.</p>
   <h3>4. Datos obligatorios</h3>
   <p>En los formularios, los datos obligatorios son los que no llevan la indicación «opcional». Sin ellos no podemos gestionar tu solicitud. El resto los facilitas solo si quieres.</p>
   <h3>5. Cuánto tiempo los conservamos</h3>
   <ul>
     <li><b>Reservas, consultas y autodiagnósticos</b> que no terminan en contratación: ${esc(String(L.conservacionMeses))} meses desde el último contacto.</li>
+    <li><b>Suscripción a los artículos mensuales:</b> hasta que te des de baja.</li>
     <li><b>Clientes:</b> mientras dure el contrato y, después, durante los plazos legales: seis años para la documentación mercantil (art. 30 del Código de Comercio) y cuatro años para la tributaria (Ley General Tributaria).</li>
     <li>Pasados esos plazos, los datos se suprimen o se bloquean durante el tiempo en que puedan exigirse responsabilidades.</li>
   </ul>

@@ -2,6 +2,10 @@
 [build]
   publish = "public"
 
+# Envío automático del informe del autodiagnóstico (ver README)
+[functions]
+  directory = "netlify/functions"
+
 [[headers]]
   for = "/*"
   [headers.values]

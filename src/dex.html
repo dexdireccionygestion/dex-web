@@ -1433,6 +1433,16 @@ header.top{border-bottom:1px solid var(--band-line)}
 @media (min-width:861px){#contacto .book-card #booking{grid-column:2;grid-row:1;align-self:start}}
 #booking .form-state.ok{margin:0}
 
+
+/* Embudo: bloque intermedio de los artículos hacia el autodiagnóstico */
+.post-diag{margin:2.4em 0;padding:24px 26px;border:1px solid var(--line,#d8d2c6);border-left:3px solid var(--ink);border-radius:12px;background:var(--paper-2)}
+.post-diag .pd-t{margin:0 0 .3em;font-family:var(--f-display);font-size:1.3rem;line-height:1.25}
+.post-diag .pd-s{margin:0 0 1em;color:var(--ink-2)}
+.post-diag .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.post-diag .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+/* Resultado del autodiagnóstico: lectura recomendada por prioridad */
+.dr-pri .dr-read{display:block;margin-top:4px;font-size:.92rem}
+.ds-check2{margin-top:6px}
 /* Agenda de Google integrada en el paso 2 de la reserva */
 .bk-embed{border:1px solid color-mix(in srgb,currentColor 18%,transparent);border-radius:14px;overflow:hidden;background:#fff;margin:14px 0 10px}
 .bk-embed iframe{display:block;width:100%;height:680px;border:0}
@@ -1978,6 +1988,24 @@ header.top{border-bottom:1px solid var(--band-line)}
           <p>Qué aporta cada opción, cuánto cuesta y cinco preguntas para elegir.</p>
           <span class="pc-meta">Lectura de 8 min</span>
         </a>
+        <a class="post-card" href="#blog-cierre-mes">
+          <span class="pc-tag">Costes, caja y herramientas</span>
+          <h3>El cierre de mes de una clínica dental: qué revisar y en qué orden</h3>
+          <p>Caja, producción, costes y margen en una hora, y tres decisiones.</p>
+          <span class="pc-meta">Lectura de 7 min</span>
+        </a>
+        <a class="post-card" href="#blog-equipo">
+          <span class="pc-tag">Equipo y organización</span>
+          <h3>Funciones y responsables: el organigrama que evita que todo pase por ti</h3>
+          <p>Quién hace qué y qué puede decidir cada uno, por escrito.</p>
+          <span class="pc-meta">Lectura de 7 min</span>
+        </a>
+        <a class="post-card" href="#blog-captacion">
+          <span class="pc-tag">Captación y marketing</span>
+          <h3>Marketing para clínicas dentales: cómo saber qué canal te trae pacientes y a qué coste</h3>
+          <p>Coste y producción por paciente nuevo, canal a canal.</p>
+          <span class="pc-meta">Lectura de 8 min</span>
+        </a>
       </div>
     </div>
   </section>
@@ -2022,6 +2050,12 @@ header.top{border-bottom:1px solid var(--band-line)}
 
     <h3>2. Quién presenta el presupuesto importa</h3>
     <p>En muchas clínicas el doctor diagnostica y una persona de coordinación presenta el presupuesto con calma, en un espacio tranquilo. Funciona porque separa el diagnóstico de la conversación económica. Lo importante es que esa persona tenga un guion, sepa resolver las objeciones habituales y conozca bien las opciones de pago.</p>
+
+    <aside class="post-diag" aria-label="Autodiagnóstico gratuito">
+      <p class="pd-t">¿Cómo está tu clínica en primeras visitas y presupuestos?</p>
+      <p class="pd-s">Hazte el autodiagnóstico gratuito: 8 preguntas, 2 minutos, y recibe tu informe con qué mejorar primero y cómo.</p>
+      <a class="btn btn-ghost" href="#autodiagnostico" data-track="cta_post_diag">Hacer el autodiagnóstico <span class="arr" aria-hidden="true">→</span></a>
+    </aside>
 
     <h3>3. El seguimiento es donde se gana o se pierde</h3>
     <p>Un presupuesto entregado sin seguimiento es un presupuesto que depende de la memoria del paciente. Un sistema mínimo:</p>
@@ -2087,6 +2121,12 @@ header.top{border-bottom:1px solid var(--band-line)}
     <h3>Producción no es facturación</h3>
     <p>Es la confusión más habitual. La producción mide el trabajo hecho; la facturación, lo que se ha emitido; los cobros, lo que ha entrado en caja. Una clínica con buena producción y malos cobros puede tener problemas de liquidez sin entender por qué.</p>
 
+    <aside class="post-diag" aria-label="Autodiagnóstico gratuito">
+      <p class="pd-t">¿Cómo está tu clínica en objetivos y cuadro de mando?</p>
+      <p class="pd-s">Hazte el autodiagnóstico gratuito: 8 preguntas, 2 minutos, y recibe tu informe con qué mejorar primero y cómo.</p>
+      <a class="btn btn-ghost" href="#autodiagnostico" data-track="cta_post_diag">Hacer el autodiagnóstico <span class="arr" aria-hidden="true">→</span></a>
+    </aside>
+
     <h3>El indicador que más se ignora: la ocupación</h3>
     <p>Muchas clínicas buscan más pacientes cuando su problema es que la agenda está mal organizada: huecos entre citas, tratamientos largos mal colocados o sillones parados a primera hora. Antes de invertir en captación, mira cuántas horas de sillón quedan vacías.</p>
 
@@ -2135,6 +2175,12 @@ header.top{border-bottom:1px solid var(--band-line)}
 
     <h3>2. Una lista de espera viva</h3>
     <p>Cada cancelación debería tener a alguien esperando. Mantén una lista de pacientes que quieren adelantar su cita o que aceptan avisos de última hora, ordenada por tipo de tratamiento y duración. Quien gestiona la agenda la consulta antes de dar un hueco por perdido.</p>
+
+    <aside class="post-diag" aria-label="Autodiagnóstico gratuito">
+      <p class="pd-t">¿Cómo está la agenda de tu clínica?</p>
+      <p class="pd-s">Hazte el autodiagnóstico gratuito: 8 preguntas, 2 minutos, y recibe tu informe con qué mejorar primero y cómo.</p>
+      <a class="btn btn-ghost" href="#autodiagnostico" data-track="cta_post_diag">Hacer el autodiagnóstico <span class="arr" aria-hidden="true">→</span></a>
+    </aside>
 
     <h3>3. Diseñar la agenda, no solo rellenarla</h3>
     <ul>
@@ -2189,6 +2235,12 @@ header.top{border-bottom:1px solid var(--band-line)}
     <h3>2. Escrito como una secuencia</h3>
     <p>Un buen protocolo sigue el recorrido del paciente: qué hace esta persona cuando llama, cuando llega, durante la consulta, al despedirse y después. Frases cortas, en el orden en que se hacen las cosas, con lo que se dice en los momentos clave.</p>
 
+    <aside class="post-diag" aria-label="Autodiagnóstico gratuito">
+      <p class="pd-t">¿Cómo está tu clínica en equipo y protocolos?</p>
+      <p class="pd-s">Hazte el autodiagnóstico gratuito: 8 preguntas, 2 minutos, y recibe tu informe con qué mejorar primero y cómo.</p>
+      <a class="btn btn-ghost" href="#autodiagnostico" data-track="cta_post_diag">Hacer el autodiagnóstico <span class="arr" aria-hidden="true">→</span></a>
+    </aside>
+
     <h3>3. Escrito con quien hace el trabajo</h3>
     <p>La persona de recepción sabe mejor que nadie dónde se atasca una llamada. Escribe el borrador con ella, no para ella. Se cumple mucho más lo que uno ha ayudado a definir.</p>
 
@@ -2238,6 +2290,12 @@ header.top{border-bottom:1px solid var(--band-line)}
     <h3>Qué aporta un gerente en plantilla</h3>
     <p>Un gerente está en la clínica todos los días. Resuelve el día a día, conoce al equipo y está disponible al momento. Es la opción natural cuando el volumen de gestión diaria justifica una persona a tiempo completo.</p>
     <p>Sus costes y riesgos hay que mirarlos con calma: el salario más los costes de empresa, el tiempo hasta encontrar a la persona adecuada, el periodo de adaptación y la dependencia de una sola persona. Si se va, el conocimiento se va con ella. Y un buen gestor generalista no siempre conoce cómo funciona una clínica dental por dentro.</p>
+
+    <aside class="post-diag" aria-label="Autodiagnóstico gratuito">
+      <p class="pd-t">¿Cómo está la dirección de tu clínica?</p>
+      <p class="pd-s">Hazte el autodiagnóstico gratuito: 8 preguntas, 2 minutos, y recibe tu informe con qué mejorar primero y cómo.</p>
+      <a class="btn btn-ghost" href="#autodiagnostico" data-track="cta_post_diag">Hacer el autodiagnóstico <span class="arr" aria-hidden="true">→</span></a>
+    </aside>
 
     <h3>Qué aporta una dirección externa</h3>
     <p>Una dirección externa no sustituye al equipo en el día a día. Aporta método, ritmo y criterio: diagnóstico, objetivos por escrito, protocolos, cuadro de mando y una reunión de dirección fija. El equipo de la clínica ejecuta y la dirección externa revisa, decide con la propiedad y sostiene el ritmo.</p>
@@ -2395,6 +2453,12 @@ header.top{border-bottom:1px solid var(--band-line)}
     <h3>3. Activa las revisiones y las higienes periódicas</h3>
     <p>Muchos pacientes no vuelven porque nadie les llama. Saca cada mes la lista de pacientes sin cita futura que deberían tener una revisión o una higiene, y que alguien concreto se encargue de contactarles. Además de producción, la revisión periódica detecta a tiempo los tratamientos que el paciente necesita.</p>
 
+    <aside class="post-diag" aria-label="Autodiagnóstico gratuito">
+      <p class="pd-t">¿Cómo está tu clínica en diagnóstico y datos?</p>
+      <p class="pd-s">Hazte el autodiagnóstico gratuito: 8 preguntas, 2 minutos, y recibe tu informe con qué mejorar primero y cómo.</p>
+      <a class="btn btn-ghost" href="#autodiagnostico" data-track="cta_post_diag">Hacer el autodiagnóstico <span class="arr" aria-hidden="true">→</span></a>
+    </aside>
+
     <h3>4. Explica el diagnóstico completo</h3>
     <p>Muchos pacientes llegan por una urgencia y se van sin saber qué más necesitan. No se trata de vender más, sino de que el paciente conozca su situación y decida con información: un diagnóstico completo, explicado con apoyo visual, y un plan por fases cuando el tratamiento es amplio.</p>
 
@@ -2449,6 +2513,12 @@ header.top{border-bottom:1px solid var(--band-line)}
     <p>Ejemplo ilustrativo: una clínica con tres gabinetes abiertos 160 horas al mes cada uno tiene 480 horas disponibles. Si ha tenido paciente 360 de esas horas, su ocupación es del 75 %. Si produjo 36.000 € ese mes, su producción por hora ocupada es de 100 € y su producción por gabinete, de 12.000 €.</p>
     <p>Con esos datos, la pregunta deja de ser «¿cómo facturo más?» y pasa a ser una de estas dos: ¿cómo lleno las 120 horas vacías, o cómo produzco más en las 360 ocupadas?</p>
 
+    <aside class="post-diag" aria-label="Autodiagnóstico gratuito">
+      <p class="pd-t">¿Cómo está tu clínica en objetivos y cuadro de mando?</p>
+      <p class="pd-s">Hazte el autodiagnóstico gratuito: 8 preguntas, 2 minutos, y recibe tu informe con qué mejorar primero y cómo.</p>
+      <a class="btn btn-ghost" href="#autodiagnostico" data-track="cta_post_diag">Hacer el autodiagnóstico <span class="arr" aria-hidden="true">→</span></a>
+    </aside>
+
     <h3>Por qué cambia tanto entre gabinetes</h3>
     <ul>
       <li><b>Horarios distintos:</b> un gabinete abierto por la tarde y otro solo por la mañana no son comparables por mes, sí por hora.</li>
@@ -2485,6 +2555,179 @@ header.top{border-bottom:1px solid var(--band-line)}
   </article>
 </div>
 
+<div class="page" data-page="blog-cierre-mes" hidden>
+  <section class="band page-head page-head-c">
+    <div class="wrap">
+      <a class="back" href="#blog">← Volver al blog</a>
+      <p class="eyebrow">Costes, caja y herramientas</p>
+      <h2 class="ph-title">El cierre de mes de una clínica dental: qué revisar y en qué orden</h2>
+      <p class="post-by">Jose Rodríguez Horrillo · Lectura de 7 min</p>
+    </div>
+  </section>
+  <article class="post wrap">
+    <p class="post-lead">Muchas clínicas cierran el mes cuando la gestoría manda los números, semanas después y sin tiempo para corregir nada. Un cierre propio, hecho en los primeros días del mes siguiente, con un orden fijo y una hora de trabajo, cambia la forma de dirigir: dejas de enterarte tarde y empiezas a decidir a tiempo.</p>
+
+    <h3>Antes de empezar: el mismo día y el mismo orden</h3>
+    <p>El cierre funciona cuando es una rutina. Fija un día (por ejemplo, el tercer día laborable del mes), una persona responsable de preparar los datos y un orden que no cambie. Lo que sigue es el orden que proponemos.</p>
+
+    <h3>1. Caja y cobros</h3>
+    <ul>
+      <li><b>Cuadre de caja:</b> lo cobrado según el programa de gestión frente a lo que hay en el banco, el datáfono y la caja física.</li>
+      <li><b>Pendiente de cobro:</b> tratamientos hechos y no cobrados, por paciente y antigüedad.</li>
+      <li><b>Financiaciones:</b> operaciones aprobadas, pendientes y rechazadas.</li>
+    </ul>
+    <p>Un descuadre pequeño que se repite cada mes casi siempre esconde un proceso mal hecho en recepción, no un error puntual.</p>
+
+    <h3>2. Producción frente a objetivo</h3>
+    <p>La producción del mes por doctor, por gabinete y por tipo de tratamiento, comparada con el objetivo de ese mes. No basta con saber si has llegado: importa saber dónde ha estado la diferencia. Si no tienes objetivos mensuales por escrito, este es el primer paso; lo explicamos en <a href="#blog-indicadores">los 8 indicadores que todo propietario debería revisar cada mes</a>.</p>
+
+    <aside class="post-diag" aria-label="Autodiagnóstico gratuito">
+      <p class="pd-t">¿Cómo está tu clínica en costes, caja y herramientas?</p>
+      <p class="pd-s">Hazte el autodiagnóstico gratuito: 8 preguntas, 2 minutos, y recibe tu informe con qué mejorar primero y cómo.</p>
+      <a class="btn btn-ghost" href="#autodiagnostico" data-track="cta_post_diag">Hacer el autodiagnóstico <span class="arr" aria-hidden="true">→</span></a>
+    </aside>
+
+    <h3>3. Costes variables</h3>
+    <ul>
+      <li><b>Laboratorio:</b> gasto del mes frente a la producción de los tratamientos que lo necesitan. Si sube más que la producción, algo se está escapando: repeticiones, tarifas o trabajos sin facturar al paciente.</li>
+      <li><b>Material y pedidos:</b> lo pedido frente a lo consumido. Los pedidos sin control son una de las fugas más habituales.</li>
+      <li><b>Comisiones y variables</b> de doctores y equipo, calculados con la misma regla cada mes.</li>
+    </ul>
+
+    <h3>4. Costes fijos y desviaciones</h3>
+    <p>Personal, alquiler, suministros, software, marketing. Aquí no hace falta revisar factura por factura: basta con comparar con el mes anterior y con el presupuesto, y mirar solo lo que se desvía.</p>
+
+    <h3>5. Margen del mes</h3>
+    <p>Producción menos costes variables y fijos. Es el número que te dice si la clínica gana dinero de verdad este mes, no lo que dice la cuenta del banco. Míralo junto con la tendencia de los últimos seis meses: un mes malo no es una tendencia, tres seguidos sí.</p>
+
+    <h3>6. Tres decisiones</h3>
+    <p>Un cierre que no termina en decisiones es solo un informe. Cierra cada mes con tres acciones como máximo, cada una con un responsable y una fecha. El mes siguiente, el cierre empieza revisando si se hicieron.</p>
+
+    <div class="post-sum">
+      <p class="ps-t">En resumen</p>
+      <ul>
+        <li>Cierra en los primeros días del mes, siempre el mismo día y en el mismo orden.</li>
+        <li>Caja y cobros, producción frente a objetivo, costes variables, fijos y margen.</li>
+        <li>Mira las desviaciones, no cada factura.</li>
+        <li>Termina con tres decisiones, cada una con responsable y fecha.</li>
+      </ul>
+    </div>
+    <div class="post-cta"><p><b>Cada mes, DEX prepara contigo dos reportes: el del día 15 y el de cierre.</b> Si quieres dejar de enterarte tarde de los números de tu clínica, empieza con un café de 30 minutos.</p><a class="btn" href="#contacto" data-track="cta_post">Reservar mi café <span class="arr" aria-hidden="true">→</span></a></div>
+    <nav class="post-more" aria-label="Más artículos"><a href="#blog-indicadores">Los 8 indicadores que todo propietario debería revisar cada mes →</a><a href="#blog-facturacion">Cómo aumentar la facturación de tu clínica dental sin captar más pacientes →</a></nav>
+  </article>
+</div>
+
+<div class="page" data-page="blog-equipo" hidden>
+  <section class="band page-head page-head-c">
+    <div class="wrap">
+      <a class="back" href="#blog">← Volver al blog</a>
+      <p class="eyebrow">Equipo y organización</p>
+      <h2 class="ph-title">Funciones y responsables: el organigrama que evita que todo pase por ti</h2>
+      <p class="post-by">Jose Rodríguez Horrillo · Lectura de 7 min</p>
+    </div>
+  </section>
+  <article class="post wrap">
+    <p class="post-lead">En muchas clínicas, cualquier duda acaba en el despacho del propietario: un cambio de cita, un pedido, un descuento, un conflicto entre compañeros. No es falta de compromiso del equipo. Es que nadie ha decidido por escrito quién se ocupa de qué.</p>
+
+    <h3>El síntoma: todo pasa por ti</h3>
+    <p>Si al volver de un día fuera de la clínica tienes una lista de cosas esperando tu decisión, el problema es de organización. Cada decisión que solo puedes tomar tú es un cuello de botella, y te quita tiempo de consulta y de dirección.</p>
+
+    <h3>1. Haz la lista de lo que pasa cada semana</h3>
+    <p>Durante dos semanas, apunta cada tarea y cada decisión que llega a ti o al equipo: confirmar citas, gestionar cancelaciones, hacer pedidos, presentar presupuestos, cuadrar la caja, responder reseñas, organizar turnos. Esa lista es la materia prima del organigrama.</p>
+
+    <h3>2. Asigna un responsable a cada tarea</h3>
+    <p>Para cada tarea, un nombre. No un puesto genérico ni «entre todos»: una persona que responde de que se haga, aunque la ayuden otras. Cuando dos personas son responsables de lo mismo, en la práctica no lo es ninguna.</p>
+
+    <aside class="post-diag" aria-label="Autodiagnóstico gratuito">
+      <p class="pd-t">¿Cómo está tu clínica en equipo y organización?</p>
+      <p class="pd-s">Hazte el autodiagnóstico gratuito: 8 preguntas, 2 minutos, y recibe tu informe con qué mejorar primero y cómo.</p>
+      <a class="btn btn-ghost" href="#autodiagnostico" data-track="cta_post_diag">Hacer el autodiagnóstico <span class="arr" aria-hidden="true">→</span></a>
+    </aside>
+
+    <h3>3. Decide qué puede decidir cada uno</h3>
+    <p>La clave no es solo quién hace qué, sino hasta dónde puede decidir sin preguntar. Por ejemplo: recepción puede mover citas dentro de la misma semana; la coordinación puede aplicar descuentos hasta un límite; los pedidos por encima de un importe los aprueba la dirección. Escribirlo evita la mitad de las consultas diarias.</p>
+
+    <h3>4. Ponlo en una página por puesto</h3>
+    <p>Cada puesto, una página: sus funciones, sus decisiones, a quién reporta y qué indicador mira cada mes. Es la base de los protocolos de trabajo; cómo escribirlos para que se cumplan lo contamos en <a href="#blog-protocolos">protocolos por puesto</a>.</p>
+
+    <h3>5. Una reunión corta y fija</h3>
+    <p>Una reunión semanal de veinte minutos con los responsables, siempre el mismo día, para revisar lo pendiente y los números de la semana. Sustituye a decenas de interrupciones y da al equipo un sitio donde plantear los problemas.</p>
+
+    <h3>Errores habituales</h3>
+    <ul>
+      <li>Hacer el organigrama y no enseñárselo al equipo.</li>
+      <li>Repartir tareas sin repartir también la capacidad de decidir.</li>
+      <li>Saltarse al responsable cuando hay prisa. Cada vez que lo haces, el equipo aprende que todo sigue pasando por ti.</li>
+    </ul>
+
+    <div class="post-sum">
+      <p class="ps-t">En resumen</p>
+      <ul>
+        <li>Apunta durante dos semanas todo lo que llega a ti y al equipo.</li>
+        <li>Un responsable con nombre para cada tarea.</li>
+        <li>Escribe qué puede decidir cada puesto sin preguntar.</li>
+        <li>Una página por puesto y una reunión semanal corta.</li>
+      </ul>
+    </div>
+    <div class="post-cta"><p><b>El organigrama y las funciones se definen en el segundo mes de trabajo con DEX.</b> Si quieres que tu clínica deje de depender de ti para todo, empieza con un café de 30 minutos.</p><a class="btn" href="#contacto" data-track="cta_post">Reservar mi café <span class="arr" aria-hidden="true">→</span></a></div>
+    <nav class="post-more" aria-label="Más artículos"><a href="#blog-protocolos">Protocolos por puesto: cómo escribirlos para que se cumplan →</a><a href="#blog-gerente">Gerente en plantilla o dirección externa: cómo decidir →</a></nav>
+  </article>
+</div>
+
+<div class="page" data-page="blog-captacion" hidden>
+  <section class="band page-head page-head-c">
+    <div class="wrap">
+      <a class="back" href="#blog">← Volver al blog</a>
+      <p class="eyebrow">Captación y marketing</p>
+      <h2 class="ph-title">Marketing para clínicas dentales: cómo saber qué canal te trae pacientes y a qué coste</h2>
+      <p class="post-by">Jose Rodríguez Horrillo · Lectura de 8 min</p>
+    </div>
+  </section>
+  <article class="post wrap">
+    <p class="post-lead">La mayoría de clínicas invierten en marketing sin poder responder a una pregunta sencilla: ¿cuántos pacientes nuevos me ha traído este canal y cuánto me ha costado cada uno? Sin esa respuesta, la inversión se decide por intuición o por lo que propone la agencia.</p>
+
+    <h3>1. Pregunta siempre cómo nos ha conocido</h3>
+    <p>Es la medida más barata y la que más se olvida. En la primera llamada o en la ficha de primera visita, recepción pregunta cómo nos ha conocido y lo registra en el programa de gestión con opciones cerradas: recomendación de un paciente, Google, redes sociales, publicidad, paso por la puerta, convenio, otro. Sin texto libre: con texto libre no se puede contar.</p>
+
+    <h3>2. Mide dos números por canal</h3>
+    <ul>
+      <li><b>Coste por paciente nuevo:</b> lo invertido en el canal en el mes ÷ pacientes nuevos que llegan por él.</li>
+      <li><b>Producción por paciente nuevo:</b> lo que han producido esos pacientes en sus primeros meses.</li>
+    </ul>
+    <p>Un canal barato que trae pacientes que no aceptan tratamientos puede salir más caro que uno caro que trae pacientes que sí los aceptan. Por eso hay que mirar los dos números juntos.</p>
+
+    <h3>3. No olvides la recomendación</h3>
+    <p>En muchas clínicas, la recomendación de pacientes es la primera fuente de pacientes nuevos y no aparece en ningún presupuesto de marketing. Cuidarla también es captar: una experiencia del paciente cuidada, pedir reseñas en el momento adecuado y agradecer las recomendaciones.</p>
+
+    <aside class="post-diag" aria-label="Autodiagnóstico gratuito">
+      <p class="pd-t">¿Cómo está tu clínica en captación y marketing?</p>
+      <p class="pd-s">Hazte el autodiagnóstico gratuito: 8 preguntas, 2 minutos, y recibe tu informe con qué mejorar primero y cómo.</p>
+      <a class="btn btn-ghost" href="#autodiagnostico" data-track="cta_post_diag">Hacer el autodiagnóstico <span class="arr" aria-hidden="true">→</span></a>
+    </aside>
+
+    <h3>4. Antes de captar más, aprovecha lo que entra</h3>
+    <p>Si una parte importante de las primeras visitas no acepta su presupuesto, más captación significa pagar más por el mismo problema. Revisa primero la conversión: lo explicamos en <a href="#blog-presupuestos">cómo mejorar la aceptación de presupuestos</a> y en <a href="#blog-facturacion">cómo aumentar la facturación sin captar más pacientes</a>.</p>
+
+    <h3>5. Decide la inversión con datos de tres o cuatro meses</h3>
+    <p>Un mes es poco para juzgar un canal. Con tres o cuatro meses de datos ya se puede decidir: mantener lo que trae pacientes que se tratan, ajustar lo que trae primeras visitas que no convierten y cortar lo que no trae nada.</p>
+
+    <h3>6. Planifica por temporada</h3>
+    <p>La demanda de una clínica no es igual todo el año. Septiembre, la vuelta a la rutina, y los meses antes de Navidad suelen ser buenos momentos para campañas de revisiones, higienes y presupuestos pendientes. El verano pide otra planificación. Preparar las campañas con antelación evita improvisar.</p>
+
+    <div class="post-sum">
+      <p class="ps-t">En resumen</p>
+      <ul>
+        <li>Registra cómo llega cada paciente nuevo, con opciones cerradas.</li>
+        <li>Mide coste y producción por paciente nuevo en cada canal.</li>
+        <li>Cuida la recomendación: también es captación.</li>
+        <li>Mejora la conversión antes de captar más y decide con datos de varios meses.</li>
+      </ul>
+    </div>
+    <div class="post-cta"><p><b>La decisión de inversión en marketing se toma en el quinto mes, con los datos de los cuatro primeros.</b> Si quieres que cada euro tenga un objetivo, empieza con un café de 30 minutos.</p><a class="btn" href="#contacto" data-track="cta_post">Reservar mi café <span class="arr" aria-hidden="true">→</span></a></div>
+    <nav class="post-more" aria-label="Más artículos"><a href="#blog-presupuestos">Cómo mejorar la aceptación de presupuestos en tu clínica dental →</a><a href="#blog-agenda">Huecos y cancelaciones: cómo recuperar el control de la agenda →</a></nav>
+  </article>
+</div>
+
 <div class="page" data-page="aviso-legal" hidden>
   <section class="band page-head page-head-sm page-head-c"><div class="wrap"><a class="back" href="#inicio">← Volver al inicio</a><p class="eyebrow">Legal</p><h2 class="ph-title">Aviso legal</h2></div></section>
   <article class="post legaltxt wrap" id="lg-aviso"></article>
@@ -2500,7 +2743,7 @@ header.top{border-bottom:1px solid var(--band-line)}
 </main>
 <!-- Formularios ocultos para Netlify Forms (detección en el despliegue). No borrar. -->
 <form name="reserva" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true"><input name="bot-field"><input name="subject"><input name="tipo"><input name="dia_y_hora"><input name="nombre"><input name="clinica"><input name="telefono"><input name="correo"><input name="cargo"><input name="gabinetes"><input name="necesidad"><input name="provincia"><input name="nivel_de_interes"><textarea name="mensaje"></textarea><input name="te_pasa_esto"><input name="autodiagnostico"><input name="prioridades"><textarea name="ficha_de_la_clinica"></textarea><input name="enviado_desde"></form>
-<form name="autodiagnostico" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true"><input name="bot-field"><input name="subject"><input name="tipo"><input name="correo"><input name="codigo"><input name="puntuacion"><input name="prioridades"><textarea name="areas"></textarea><input name="enviado_desde"></form>
+<form name="autodiagnostico" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true"><input name="bot-field"><input name="subject"><input name="tipo"><input name="correo"><input name="codigo"><input name="puntuacion"><input name="prioridades"><textarea name="areas"></textarea><input name="enviado_desde"><input name="novedades"><textarea name="datos_informe"></textarea></form>
 
 
 <footer class="foot2">
@@ -2613,6 +2856,17 @@ const CONFIG = {
     { area:"Captación y marketing", gana:"Que cada euro de marketing tenga un objetivo y una medición.", q:"¿Sabes qué canal te trae pacientes nuevos y a qué coste?", ops:["No lo sé","Invertimos, pero sin medir","Lo sé a grandes rasgos","Sí, por canal y coste por paciente"] },
     { area:"Costes, caja y herramientas", gana:"Más control sobre la rentabilidad real de la clínica.", q:"¿Revisas cada mes los costes de laboratorio, el cierre de caja y los márgenes?", ops:["Nunca","Solo cuando algo falla","Algunas cosas","Sí, todo cada mes"] }
   ],
+  /* Lectura recomendada para cada área del autodiagnóstico (en el resultado y en el informe por correo). */
+  lecturas: {
+    "Diagnóstico y datos": ["blog-gabinete", "Facturación por gabinete: cómo calcularla y qué hacer con el dato"],
+    "Objetivos y cuadro de mando": ["blog-indicadores", "Los 8 indicadores que todo propietario debería revisar cada mes"],
+    "Equipo y organización": ["blog-equipo", "Funciones y responsables: el organigrama que evita que todo pase por ti"],
+    "Protocolos por puesto": ["blog-protocolos", "Protocolos por puesto: cómo escribirlos para que se cumplan"],
+    "Experiencia del paciente": ["blog-agenda", "Huecos y cancelaciones: cómo recuperar el control de la agenda"],
+    "Primeras visitas y presupuestos": ["blog-presupuestos", "Cómo mejorar la aceptación de presupuestos en tu clínica dental"],
+    "Captación y marketing": ["blog-captacion", "Marketing para clínicas dentales: cómo saber qué canal te trae pacientes y a qué coste"],
+    "Costes, caja y herramientas": ["blog-cierre-mes", "El cierre de mes de una clínica dental: qué revisar y en qué orden"]
+  },
   /* Calculadora "Lo que se escapa": valores de ejemplo [PROVISIONAL] */
   fuga: { huecosSemana:4, valorHora:120, presupuestosMes:6, importeMedio:900, semanasAnio:44, recuperable:25 },
   /* Acciones de temporada por mes natural (0 = enero). Se suman al mes del plan que caiga en ese mes. */
@@ -2649,6 +2903,8 @@ const CONFIG = {
     proveedores: [                                         // [PENDIENTE] completar al conectar los servicios
       { servicio:"Alojamiento de la web", nombre:"Netlify, Inc.", ubicacion:"Estados Unidos (adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
       { servicio:"Correo electrónico", nombre:"Google (Google Workspace: Gmail)", ubicacion:"UE y otros países (Google Ireland Ltd.; Google LLC adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
+      // Al activar el envío automático del informe, añadir aquí el proveedor elegido, p. ej.:
+      // { servicio:"Envío del informe del autodiagnóstico y de los artículos", nombre:"Sendinblue SAS (Brevo)", ubicacion:"Unión Europea (Francia)" },
       { servicio:"Envío de formularios por correo", nombre:"Netlify, Inc. (Netlify Forms)", ubicacion:"Estados Unidos (adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
       { servicio:"Agenda de citas y videollamada", nombre:"Google (Google Workspace: Calendar y Meet)", ubicacion:"UE y otros países (Google Ireland Ltd.; Google LLC adherida al Marco de Privacidad de Datos UE-EE. UU.)" }
     ],
@@ -2663,7 +2919,9 @@ const CONFIG = {
     destino: "jrodriguez@dexdireccionygestion.com",       // [CONFIRMADO] a dónde llegan reservas y autodiagnósticos
     alias: "",                                             // solo FormSubmit: alias aleatorio tras activar
     get endpoint(){ return this.proveedor === "netlify" ? "/" : "https://formsubmit.co/ajax/" + (this.alias || this.destino); },
-    minSegundos: 3
+    minSegundos: 3,
+    /* true cuando esté configurado el envío automático del informe (función de Netlify + Brevo o Resend). Ver README. */
+    informeAuto: false
   },                    // [PENDIENTE]
   /* Analítica: desactivada. Activar solo con banner de consentimiento configurado. */
   analytics: { enabled:false }
@@ -2981,6 +3239,8 @@ function mailFields(d){
     o["Código"] = d.autodiagnosticoId; o["Puntuación"] = `${d.puntuacion}/100 · ${d.nivel}`;
     o["Prioridades"] = (d.prioridades||[]).join(", ");
     o["Áreas"] = (d.areas||[]).map(a => `${a.area}: ${a.estado} — ${a.respuesta}`).join("\n");
+    o["Quiere artículos mensuales"] = d.novedades ? "Sí" : "No";
+    o["Datos del informe"] = JSON.stringify({ id:d.autodiagnosticoId, puntuacion:d.puntuacion, nivel:d.nivel, prioridades:d.prioridades, areas:(d.areas||[]).map(a => ({ area:a.area, valor:a.valor, estado:a.estado, respuesta:a.respuesta })) });
   } else {
     const previo = d.tipo === "lead";
     const cuando = d.cita ? d.cita : previo ? "Está eligiendo hora en la agenda de citas de Google Calendar" : "Prefiere que le llamemos para fijar la cita";
@@ -3005,7 +3265,8 @@ function mailFields(d){
 const NF_KEYS = { "Tipo":"tipo", "Día y hora":"dia_y_hora", "Nombre":"nombre", "Clínica":"clinica", "Teléfono":"telefono", "Correo":"correo",
   "Cargo":"cargo", "Gabinetes":"gabinetes", "Necesidad principal":"necesidad", "Provincia":"provincia", "Nivel de interés":"nivel_de_interes",
   "Mensaje":"mensaje", "Marcó en «¿Te pasa esto?»":"te_pasa_esto", "Autodiagnóstico":"autodiagnostico", "Prioridades":"prioridades",
-  "Ficha de la clínica":"ficha_de_la_clinica", "Código":"codigo", "Puntuación":"puntuacion", "Áreas":"areas", "Enviado desde":"enviado_desde" };
+  "Ficha de la clínica":"ficha_de_la_clinica", "Código":"codigo", "Puntuación":"puntuacion", "Áreas":"areas", "Enviado desde":"enviado_desde",
+  "Quiere artículos mensuales":"novedades", "Datos del informe":"datos_informe" };
 async function post(data){
   const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 12000), m = mailFields(data);
   try{
@@ -3325,13 +3586,14 @@ function initDiag(){
     root.innerHTML = `<div class="dr-head"><div class="dr-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--paper-2)" stroke-width="10"/><circle cx="60" cy="60" r="52" fill="none" stroke="var(--brass)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${C*score/100} ${C}" transform="rotate(-90 60 60)"/></svg><div><b>${score}</b><span>de 100</span></div></div>
         <div><p class="eyebrow">Tu resultado orientativo</p><h2 tabindex="-1">${esc(lvl)}</h2><p class="dr-sub">${esc(lvlTxt)}</p></div></div>
       <div class="dr-areas">${Q.map((q,k)=>{ const [t,c] = status(ans[k]); return `<div class="dr-row"><span class="dr-name">${esc(q.area)}</span><span class="dr-track" aria-hidden="true"><i style="width:${(ans[k]+1)/4*100}%"></i></span><em class="${c}">${t}</em></div>`; }).join("")}</div>
-      <div class="dr-pri"><p class="eyebrow">Por dónde empezaríamos</p><ol>${pri.map(x=>`<li><b>${esc(x.q.area)}.</b> ${esc(x.q.gana)}</li>`).join("")}</ol></div>
+      <div class="dr-pri"><p class="eyebrow">Por dónde empezaríamos</p><ol>${pri.map(x=>{ const r = CONFIG.lecturas[x.q.area]; return `<li><b>${esc(x.q.area)}.</b> ${esc(x.q.gana)}${r ? ` <a class="link dr-read" href="${REAL_PATHS ? "/" + r[0] + "/" : "#" + r[0]}" data-track="diag_read">Lee: ${esc(r[1])} →</a>` : ""}</li>`; }).join("")}</ol></div>
       <div class="dr-cta"><a class="btn btn-2l" id="dqBook" href="#contacto" data-track="cta_diag_result"><span class="b-main">Revisarlo en un café de 30 min <span class="arr" aria-hidden="true">→</span></span>${ns?`<span class="b-sub"><span class="pulse" aria-hidden="true"></span>Próximo hueco libre: <b>${esc(ns.lab)}</b></span>`:""}</a>
         <button type="button" class="txtbtn" id="dqAgain">Repetir el autodiagnóstico</button></div>
       <form class="dr-send" id="drSend" novalidate>
-        <div class="ds-txt"><p class="ds-t">¿Aún no quieres llamar? Recibe tu resultado por correo.</p><p class="ds-s">Tu puntuación, tus áreas prioritarias y qué hacer en cada una, para revisarlo con calma.</p></div>
+        <div class="ds-txt"><p class="ds-t">¿Aún no quieres llamar? Recibe tu informe completo por correo.</p><p class="ds-s">Tu puntuación, tus prioridades, qué hacer este mes en cada una y qué leer para empezar.</p></div>
         <div class="ds-row"><label class="sr" for="ds_email">Tu correo electrónico</label><input id="ds_email" type="email" autocomplete="email" placeholder="nombre@clinica.es" required><button class="btn" type="submit">Enviármelo</button></div>
-        <label class="check ds-check" for="ds_priv"><input id="ds_priv" type="checkbox" required><span>Acepto la <button type="button" class="inline-link" data-dialog="dlgPrivacy">política de privacidad</button>. Sin envíos comerciales.</span></label>
+        <label class="check ds-check" for="ds_priv"><input id="ds_priv" type="checkbox" required><span>Acepto la <button type="button" class="inline-link" data-dialog="dlgPrivacy">política de privacidad</button>.</span></label>
+        <label class="check ds-check ds-check2" for="ds_news"><input id="ds_news" type="checkbox"><span>Además, quiero recibir un artículo práctico al mes. Puedes darte de baja cuando quieras.</span></label>
         <p class="err" id="ds_err" role="alert"></p>
       </form>
       <p class="micro">Si reservas, puedes adjuntar tus respuestas a la solicitud para preparar el café. Guardamos el resultado solo en este navegador durante ${DIAG_DIAS} días. <button type="button" class="inline-link" id="dqForget">Borrarlo</button></p>`;
@@ -3390,12 +3652,13 @@ function initDiagSend(score, lvl, pri){
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){ err.textContent = "Escribe un correo válido, por ejemplo nombre@clinica.es."; $("#ds_email").focus(); return; }
     if(!$("#ds_priv").checked){ err.textContent = "Acepta la política de privacidad para enviarte el resultado."; return; }
     err.textContent = "";
+    const news = !!($("#ds_news") && $("#ds_news").checked);
     DIAG.email = em; saveDiag();
     const lc = $("#l_contact"); if(lc && !lc.value) lc.value = em;
     track("diag_email");
     const body = diagReport(score, lvl, pri);
-    if(CONFIG.form.endpoint) post({tipo:"autodiagnostico", autodiagnosticoId:DIAG.id, email:em, areas:DIAG.areas, puntuacion:score, nivel:lvl, prioridades:DIAG.prioridades, respuestas:DIAG.respuestas, origen:"web-dex", fecha:new Date().toISOString()}).catch(() => {});
-    form.innerHTML = `<div class="ds-ok"><p><b>Tu resultado está listo.</b> Ábrelo en tu correo para guardarlo en <b>${esc(em)}</b>, o cópialo.</p>
+    if(CONFIG.form.endpoint) post({tipo:"autodiagnostico", autodiagnosticoId:DIAG.id, email:em, areas:DIAG.areas, puntuacion:score, nivel:lvl, prioridades:DIAG.prioridades, respuestas:DIAG.respuestas, novedades:news, origen:"web-dex", fecha:new Date().toISOString()}).catch(() => {});
+    form.innerHTML = `<div class="ds-ok">${CONFIG.form.informeAuto ? `<p><b>Te lo hemos enviado a ${esc(em)}.</b> Si no lo ves en unos minutos, mira en la carpeta de spam o de promociones. También puedes copiarlo aquí:</p>` : `<p><b>Tu resultado está listo.</b> Ábrelo en tu correo para guardarlo en <b>${esc(em)}</b>, o cópialo.</p>`}
       <pre>${esc(body)}</pre>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="copy" style="text-decoration:none" href="mailto:${esc(em)}?subject=${encodeURIComponent("Tu autodiagnóstico DEX · "+score+"/100")}&body=${encodeURIComponent(body)}">Abrir en mi correo</a><button type="button" class="copy" data-copy="${esc(body)}">Copiar resultado</button></div></div>`;
   });
@@ -3509,7 +3772,7 @@ function privacidadHTML(){
   <ul>
     <li><b>Al reservar el café:</b> nombre y apellidos, nombre de la clínica, teléfono o correo y el día y la hora que eliges. Si quieres, también cargo, número de gabinetes, principal necesidad, provincia, un mensaje y el nivel de servicio que te interesa.</li>
     <li><b>Si adjuntas tu autodiagnóstico:</b> tus respuestas a las 8 preguntas, la puntuación orientativa, las áreas prioritarias y las casillas que hayas marcado en «¿Te pasa esto?». Puedes desmarcar la casilla «Adjuntar mi autodiagnóstico» antes de enviar.</li>
-    <li><b>Si pides el resultado del autodiagnóstico por correo:</b> tu correo electrónico y el resultado.</li>
+    <li><b>Si pides el informe del autodiagnóstico por correo:</b> tu correo electrónico, tus respuestas y el resultado. Si además marcas la casilla de artículos mensuales, guardamos tu correo para enviártelos.</li>
     <li><b>Si nos escribes o nos llamas</b> por correo, teléfono${CONFIG.contacto.whatsapp ? " o WhatsApp" : ""}: los datos de contacto y lo que nos cuentes.</li>
     <li><b>Si contratas:</b> los datos de la clínica y de sus responsables necesarios para el contrato y la facturación.</li>
   </ul>
@@ -3520,16 +3783,18 @@ function privacidadHTML(){
     <tbody>
       <tr><td>Gestionar tu reserva o tu petición de llamada, confirmarte la cita y preparar la reunión.</td><td>Aplicación de medidas precontractuales a petición tuya (art. 6.1.b RGPD).</td></tr>
       <tr><td>Usar tu autodiagnóstico adjunto y los datos opcionales para conocer la situación de partida de tu clínica.</td><td>Tu consentimiento (art. 6.1.a RGPD), que das al adjuntarlos y puedes retirar cuando quieras.</td></tr>
-      <tr><td>Enviarte el resultado del autodiagnóstico a tu correo.</td><td>Tu consentimiento (art. 6.1.a RGPD).</td></tr>
+      <tr><td>Enviarte el informe del autodiagnóstico a tu correo.</td><td>Tu consentimiento (art. 6.1.a RGPD).</td></tr>
+      <tr><td>Si lo marcas, enviarte un artículo práctico al mes sobre la gestión de clínicas dentales.</td><td>Tu consentimiento expreso (art. 6.1.a RGPD y art. 21 LSSI-CE). Puedes darte de baja en cualquier momento desde el propio correo o escribiéndonos.</td></tr>
       <tr><td>Responder a tus consultas por correo${CONFIG.contacto.whatsapp ? ", teléfono o WhatsApp" : " o teléfono"}.</td><td>Tu consentimiento y, si preguntas por nuestros servicios, medidas precontractuales (art. 6.1.a y 6.1.b RGPD).</td></tr>
       <tr><td>Si contratas: prestar el servicio, facturar y cumplir nuestras obligaciones fiscales y mercantiles.</td><td>Ejecución del contrato y cumplimiento de obligaciones legales (art. 6.1.b y 6.1.c RGPD).</td></tr>
     </tbody></table></div>
-  <p><b>No te enviaremos comunicaciones comerciales</b> (boletines, ofertas o campañas) salvo que nos des tu consentimiento expreso para ello por separado, como exige el artículo 21 de la LSSI-CE.</p>
+  <p><b>No te enviaremos comunicaciones comerciales</b> (boletines, ofertas o campañas) salvo que nos des tu consentimiento expreso para ello por separado, como exige el artículo 21 de la LSSI-CE: por ejemplo, marcando la casilla de artículos mensuales.</p>
   <h3>4. Datos obligatorios</h3>
   <p>En los formularios, los datos obligatorios son los que no llevan la indicación «opcional». Sin ellos no podemos gestionar tu solicitud. El resto los facilitas solo si quieres.</p>
   <h3>5. Cuánto tiempo los conservamos</h3>
   <ul>
     <li><b>Reservas, consultas y autodiagnósticos</b> que no terminan en contratación: ${esc(String(L.conservacionMeses))} meses desde el último contacto.</li>
+    <li><b>Suscripción a los artículos mensuales:</b> hasta que te des de baja.</li>
     <li><b>Clientes:</b> mientras dure el contrato y, después, durante los plazos legales: seis años para la documentación mercantil (art. 30 del Código de Comercio) y cuatro años para la tributaria (Ley General Tributaria).</li>
     <li>Pasados esos plazos, los datos se suprimen o se bloquean durante el tiempo en que puedan exigirse responsabilidades.</li>
   </ul>
