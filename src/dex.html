@@ -2542,7 +2542,7 @@ const CONFIG = {
   contacto: {
     email: "jrodriguez@dexdireccionygestion.com",          // [CONFIRMADO]
     telefono: "+34 697 33 48 48",                          // [CONFIRMADO]
-    whatsapp: "34697334848",                               // [PROVISIONAL] confirmar que este número tiene WhatsApp. Vacío = sin botón
+    whatsapp: "",                                          // Vacío = sin WhatsApp en la web (decisión 15/11/2026). Para activarlo: "34697334848"
     whatsappTexto: "Hola, me gustaría reservar un café con DEX para hablar de mi clínica.",
     redes: []                                              // [PENDIENTE] [{nombre:"LinkedIn", url:"https://..."}]
   },
@@ -3510,7 +3510,7 @@ function privacidadHTML(){
     <li><b>Al reservar el café:</b> nombre y apellidos, nombre de la clínica, teléfono o correo y el día y la hora que eliges. Si quieres, también cargo, número de gabinetes, principal necesidad, provincia, un mensaje y el nivel de servicio que te interesa.</li>
     <li><b>Si adjuntas tu autodiagnóstico:</b> tus respuestas a las 8 preguntas, la puntuación orientativa, las áreas prioritarias y las casillas que hayas marcado en «¿Te pasa esto?». Puedes desmarcar la casilla «Adjuntar mi autodiagnóstico» antes de enviar.</li>
     <li><b>Si pides el resultado del autodiagnóstico por correo:</b> tu correo electrónico y el resultado.</li>
-    <li><b>Si nos escribes o nos llamas</b> por correo, teléfono o WhatsApp: los datos de contacto y lo que nos cuentes.</li>
+    <li><b>Si nos escribes o nos llamas</b> por correo, teléfono${CONFIG.contacto.whatsapp ? " o WhatsApp" : ""}: los datos de contacto y lo que nos cuentes.</li>
     <li><b>Si contratas:</b> los datos de la clínica y de sus responsables necesarios para el contrato y la facturación.</li>
   </ul>
   <p class="lg-note"><b>Importante:</b> no incluyas datos de pacientes ni datos de salud en los formularios ni en los mensajes. No los necesitamos para preparar el café.</p>
@@ -3521,7 +3521,7 @@ function privacidadHTML(){
       <tr><td>Gestionar tu reserva o tu petición de llamada, confirmarte la cita y preparar la reunión.</td><td>Aplicación de medidas precontractuales a petición tuya (art. 6.1.b RGPD).</td></tr>
       <tr><td>Usar tu autodiagnóstico adjunto y los datos opcionales para conocer la situación de partida de tu clínica.</td><td>Tu consentimiento (art. 6.1.a RGPD), que das al adjuntarlos y puedes retirar cuando quieras.</td></tr>
       <tr><td>Enviarte el resultado del autodiagnóstico a tu correo.</td><td>Tu consentimiento (art. 6.1.a RGPD).</td></tr>
-      <tr><td>Responder a tus consultas por correo, teléfono o WhatsApp.</td><td>Tu consentimiento y, si preguntas por nuestros servicios, medidas precontractuales (art. 6.1.a y 6.1.b RGPD).</td></tr>
+      <tr><td>Responder a tus consultas por correo${CONFIG.contacto.whatsapp ? ", teléfono o WhatsApp" : " o teléfono"}.</td><td>Tu consentimiento y, si preguntas por nuestros servicios, medidas precontractuales (art. 6.1.a y 6.1.b RGPD).</td></tr>
       <tr><td>Si contratas: prestar el servicio, facturar y cumplir nuestras obligaciones fiscales y mercantiles.</td><td>Ejecución del contrato y cumplimiento de obligaciones legales (art. 6.1.b y 6.1.c RGPD).</td></tr>
     </tbody></table></div>
   <p><b>No te enviaremos comunicaciones comerciales</b> (boletines, ofertas o campañas) salvo que nos des tu consentimiento expreso para ello por separado, como exige el artículo 21 de la LSSI-CE.</p>
@@ -3538,7 +3538,7 @@ function privacidadHTML(){
   <div class="post-table" role="region" aria-label="Encargados del tratamiento" tabindex="0"><table>
     <thead><tr><th>Servicio</th><th>Proveedor</th><th>Ubicación de los datos</th></tr></thead>
     <tbody>${prov}</tbody></table></div>
-  <p>Si nos contactas por WhatsApp, Meta trata también esos datos según sus propias condiciones.</p>
+  ${CONFIG.contacto.whatsapp ? "<p>Si nos contactas por WhatsApp, Meta trata también esos datos según sus propias condiciones.</p>" : ""}
   <h3>7. Transferencias internacionales</h3>
   <p>Damos prioridad a proveedores que alojan los datos en la Unión Europea. Si alguno los trata fuera del Espacio Económico Europeo, solo lo hacemos con las garantías del RGPD: una decisión de adecuación de la Comisión Europea (como el Marco de Privacidad de Datos UE-EE. UU.) o cláusulas contractuales tipo.</p>
   <h3>8. El autodiagnóstico no toma decisiones por ti</h3>
