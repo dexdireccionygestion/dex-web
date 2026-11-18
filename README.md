@@ -14,7 +14,10 @@ Cuando alguien pide su informe, el formulario `autodiagnostico` llega a Netlify 
 `netlify/functions/submission-created.js` le envía el informe por correo (prioridades, qué hacer este mes y
 qué leer). Si marcó la casilla de artículos mensuales, se le da de alta en la lista de Brevo.
 
-Para activarlo (una sola vez):
+Estado (18/11/2026): activo con **Resend** (dominio verificado en Resend, región Irlanda; variables EMAIL_PROVIDER, EMAIL_FROM, EMAIL_REPLY_TO y EMAIL_API_KEY en Netlify).
+La misma función envía también un correo de confirmación a quien deja sus datos para el café (formulario `reserva`).
+
+Para configurarlo con Brevo en su lugar:
 1. Crear una cuenta en Brevo (brevo.com, plan gratuito) con el correo de DEX.
 2. En Brevo, verificar el remitente (p. ej. informe@dexdireccionygestion.com) y autenticar el dominio
    (añadir en Squarespace los registros DNS que indique Brevo). Crear una lista «Artículos DEX» y anotar su número.

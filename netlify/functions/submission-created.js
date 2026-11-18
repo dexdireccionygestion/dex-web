@@ -125,19 +125,52 @@ function informe(d) {
   return { asunto, html, text };
 }
 
-async function enviar({ to, asunto, html, text }) {
+async function enviar({ to, asunto, html, text, tipo = 'autodiagnostico' }) {
   const P = (process.env.EMAIL_PROVIDER || '').toLowerCase(), key = process.env.EMAIL_API_KEY, from = process.env.EMAIL_FROM;
   const name = process.env.EMAIL_FROM_NAME || 'Jose Rodríguez · DEX';
   const reply = process.env.EMAIL_REPLY_TO || 'jrodriguez@dexdireccionygestion.com';
   if (P === 'brevo') {
     return fetch('https://api.brevo.com/v3/smtp/email', { method: 'POST', headers: { 'api-key': key, 'content-type': 'application/json', accept: 'application/json' },
-      body: JSON.stringify({ sender: { name, email: from }, to: [{ email: to }], replyTo: { email: reply }, subject: asunto, htmlContent: html, textContent: text, tags: ['autodiagnostico'] }) });
+      body: JSON.stringify({ sender: { name, email: from }, to: [{ email: to }], replyTo: { email: reply }, subject: asunto, htmlContent: html, textContent: text, tags: [tipo] }) });
   }
   if (P === 'resend') {
     return fetch('https://api.resend.com/emails', { method: 'POST', headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
-      body: JSON.stringify({ from: `${name} <${from}>`, to: [to], reply_to: reply, subject: asunto, html, text, tags: [{ name: 'tipo', value: 'autodiagnostico' }] }) });
+      body: JSON.stringify({ from: `${name} <${from}>`, to: [to], reply_to: reply, subject: asunto, html, text, tags: [{ name: 'tipo', value: tipo }] }) });
   }
   throw new Error('EMAIL_PROVIDER no válido: ' + P);
+}
+
+/* Confirmación a quien deja sus datos para el café */
+const AGENDA = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1_Kj4iHs_FCSsyS0xB2yHaWgu-Uw0VuNAlB6cUgd5hRD3F-hP_XqIem6Ktf3cyCJGGj-Z-FTea?hl=es';
+function confirmacion(f) {
+  const nombre = String(f.nombre || '').trim().split(/\s+/)[0] || '';
+  const conDiag = !!String(f.autodiagnostico || '').trim();
+  const asunto = 'Hemos recibido tus datos · Café con DEX';
+  const p = t => `<p style="margin:0 0 14px;font:16px/1.6 Arial,sans-serif;color:#2b2a27">${t}</p>`;
+  const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${esc(asunto)}</title></head>
+<body style="margin:0;background:#F4F1EA;padding:24px 12px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#FBFAF7;border:1px solid #e3ddd1;border-radius:14px">
+<tr><td style="padding:32px">
+  <p style="margin:0 0 4px;font:400 26px Georgia,serif;letter-spacing:.3em;color:#0B0B0D">DEX</p>
+  <p style="margin:0 0 26px;font:600 10px Arial,sans-serif;letter-spacing:.32em;color:#0B0B0D">DIRECCIÓN EXTERNA</p>
+  ${p(`Hola${nombre ? ' ' + esc(nombre) : ''}:`)}
+  ${p(`Gracias por tu interés en DEX. Hemos recibido tus datos${f.clinica ? ` y los de <b>${esc(f.clinica)}</b>` : ''}.`)}
+  ${p('<b>Si ya has elegido día y hora</b>, te llegará la invitación de Google Calendar con el enlace de Google Meet. <b>Si aún no</b>, puedes elegirla aquí:')}
+  <p style="margin:6px 0 22px"><a href="${AGENDA}" style="display:inline-block;background:#0B0B0D;color:#F8F8F6;text-decoration:none;font:600 15px Arial,sans-serif;padding:14px 24px;border-radius:999px">Elegir día y hora →</a></p>
+  ${p('En el café, 30 minutos por videollamada, me cuentas cómo funciona hoy tu clínica, te doy una primera visión externa de por dónde empezaría y te digo con franqueza si DEX encaja o no.')}
+  ${conDiag ? '' : p(`Si tienes dos minutos antes, haz el <a href="${url('autodiagnostico/')}" style="color:#0B0B0D">autodiagnóstico gratuito</a>: así llego con tus respuestas delante y aprovechamos mejor el tiempo.`)}
+  <p style="margin:22px 0 4px;font:15px/1.5 Arial,sans-serif;color:#2b2a27">Un saludo,</p>
+  <p style="margin:0;font:600 15px Arial,sans-serif;color:#0B0B0D">Jose Rodríguez Horrillo</p>
+  <p style="margin:0 0 18px;font:14px Arial,sans-serif;color:#6b665d">Fundador de DEX · Dirección y gestión de clínicas dentales</p>
+  <p style="margin:0;font:12px/1.5 Arial,sans-serif;color:#8a8478">Recibes este correo porque dejaste tus datos para reservar un café en <a href="${SITE}/" style="color:#8a8478">dexdireccionygestion.com</a>. Si respondes, me llega directamente. <a href="${SITE}/privacidad/" style="color:#8a8478">Política de privacidad</a>.</p>
+</td></tr></table></td></tr></table></body></html>`;
+  const text = [`Hola${nombre ? ' ' + nombre : ''}:`, '', 'Gracias por tu interés en DEX. Hemos recibido tus datos.', '',
+    'Si ya has elegido día y hora, te llegará la invitación de Google Calendar con el enlace de Google Meet. Si aún no, puedes elegirla aquí:', AGENDA, '',
+    'En el café, 30 minutos por videollamada, me cuentas cómo funciona hoy tu clínica, te doy una primera visión externa y te digo con franqueza si DEX encaja o no.', '',
+    conDiag ? '' : `Si tienes dos minutos antes, haz el autodiagnóstico gratuito: ${url('autodiagnostico/')}`, '',
+    'Jose Rodríguez Horrillo · DEX'].join('\n');
+  return { asunto, html, text };
 }
 
 async function suscribir(email) {
@@ -150,11 +183,17 @@ async function suscribir(email) {
 exports.handler = async (event) => {
   try {
     const { payload } = JSON.parse(event.body || '{}');
-    if (!payload || payload.form_name !== 'autodiagnostico') return { statusCode: 200, body: 'ignorado' };
+    const form = payload && payload.form_name;
+    if (form !== 'autodiagnostico' && form !== 'reserva') return { statusCode: 200, body: 'ignorado' };
     if (!process.env.EMAIL_PROVIDER || !process.env.EMAIL_API_KEY || !process.env.EMAIL_FROM) return { statusCode: 200, body: 'envío no configurado' };
     const f = payload.data || {};
     const to = String(f.correo || f.email || '').trim();
     if (!EMAIL_RE.test(to)) return { statusCode: 200, body: 'sin correo válido' };
+    if (form === 'reserva') {
+      const c = await enviar({ to, tipo: 'reserva', ...confirmacion(f) });
+      if (!c.ok) console.error('Envío de la confirmación fallido', c.status, await c.text());
+      return { statusCode: 200, body: 'ok' };
+    }
     let d = {};
     try { d = JSON.parse(f.datos_informe || '{}'); } catch (e) { d = {}; }
     if (!d.puntuacion && f.puntuacion) d.puntuacion = parseInt(f.puntuacion, 10);
@@ -172,3 +211,4 @@ exports.handler = async (event) => {
 };
 
 exports._informe = informe; // para pruebas
+exports._confirmacion = confirmacion;

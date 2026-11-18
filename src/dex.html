@@ -2892,7 +2892,7 @@ const CONFIG = {
      Vacío = el formulario valida y prepara el mensaje, y se muestra cómo enviarlo por correo, teléfono o WhatsApp. */
   /* Textos legales (aviso legal, privacidad y cookies). Lo vacío se muestra como [pendiente] en la web. */
   legal: {
-    actualizado: "29 de octubre de 2026",
+    actualizado: "18 de noviembre de 2026",
     dominio: "dexdireccionygestion.com",              // [CONFIRMADO]
     jurisdiccion: "",                                      // [PENDIENTE] ciudad del domicilio social, p. ej. "Madrid"
     emailPrivacidad: "",                                   // [OPCIONAL] vacío = se usa contacto.email
@@ -2903,8 +2903,7 @@ const CONFIG = {
     proveedores: [                                         // [PENDIENTE] completar al conectar los servicios
       { servicio:"Alojamiento de la web", nombre:"Netlify, Inc.", ubicacion:"Estados Unidos (adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
       { servicio:"Correo electrónico", nombre:"Google (Google Workspace: Gmail)", ubicacion:"UE y otros países (Google Ireland Ltd.; Google LLC adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
-      // Al activar el envío automático del informe, añadir aquí el proveedor elegido, p. ej.:
-      // { servicio:"Envío del informe del autodiagnóstico y de los artículos", nombre:"Sendinblue SAS (Brevo)", ubicacion:"Unión Europea (Francia)" },
+      { servicio:"Envío del informe del autodiagnóstico y de la confirmación de reserva", nombre:"Resend, Inc.", ubicacion:"Envío desde la UE (Irlanda); empresa en Estados Unidos adherida al Marco de Privacidad de Datos UE-EE. UU." },
       { servicio:"Envío de formularios por correo", nombre:"Netlify, Inc. (Netlify Forms)", ubicacion:"Estados Unidos (adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
       { servicio:"Agenda de citas y videollamada", nombre:"Google (Google Workspace: Calendar y Meet)", ubicacion:"UE y otros países (Google Ireland Ltd.; Google LLC adherida al Marco de Privacidad de Datos UE-EE. UU.)" }
     ],
@@ -2921,7 +2920,7 @@ const CONFIG = {
     get endpoint(){ return this.proveedor === "netlify" ? "/" : "https://formsubmit.co/ajax/" + (this.alias || this.destino); },
     minSegundos: 3,
     /* true cuando esté configurado el envío automático del informe (función de Netlify + Brevo o Resend). Ver README. */
-    informeAuto: false
+    informeAuto: true
   },                    // [PENDIENTE]
   /* Analítica: desactivada. Activar solo con banner de consentimiento configurado. */
   analytics: { enabled:false }
