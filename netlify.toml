@@ -2,6 +2,11 @@
 [build]
   publish = "public"
 
+# Estas variables no son secretas (proveedor y direcciones de correo, que aparecen en la web):
+# el escáner de secretos de Netlify no debe bloquear la publicación por ellas. La clave EMAIL_API_KEY sí se sigue vigilando.
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "EMAIL_PROVIDER,EMAIL_FROM,EMAIL_REPLY_TO"
+
 # Envío automático del informe del autodiagnóstico (ver README)
 [functions]
   directory = "netlify/functions"
