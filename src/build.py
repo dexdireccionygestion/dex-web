@@ -27,7 +27,7 @@ PUBLICADO = {  # fecha en que cada artículo se publicó con su propia direcció
     'blog-presupuestos': '2026-10-29', 'blog-indicadores': '2026-10-29', 'blog-agenda': '2026-10-29',
     'blog-protocolos': '2026-10-29', 'blog-gerente': '2026-10-29', 'blog-facturacion': '2026-11-18', 'blog-gabinete': '2026-11-18',
     'blog-cierre-mes': '2026-11-18', 'blog-equipo': '2026-11-18', 'blog-captacion': '2026-11-18',
-    'blog-plan-anual': None, 'blog-recepcion': None,  # poner la fecha el día que se publiquen
+    'blog-plan-anual': '2026-11-20', 'blog-recepcion': '2026-11-20',
 }
 
 HOME = ('Gestión y dirección externa de clínicas dentales · DEX', None)
