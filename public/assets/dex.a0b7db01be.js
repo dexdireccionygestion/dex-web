@@ -1,4 +1,4 @@
-window.DEX_PAGES = ["autodiagnostico", "aviso-legal", "blog", "blog-agenda", "blog-captacion", "blog-cierre-mes", "blog-equipo", "blog-facturacion", "blog-gabinete", "blog-gerente", "blog-indicadores", "blog-plan-anual", "blog-presupuestos", "blog-protocolos", "blog-recepcion", "consultoria-clinicas-dentales", "cookies", "inversion-detalle", "metodo", "preguntas", "privacidad"];
+window.DEX_PAGES = ["autodiagnostico", "aviso-legal", "blog", "blog-agenda", "blog-captacion", "blog-cierre-mes", "blog-equipo", "blog-facturacion", "blog-gabinete", "blog-gerente", "blog-indicadores", "blog-plan-anual", "blog-presupuestos", "blog-protocolos", "blog-recepcion", "consultoria-clinicas-dentales", "consultoria-dental-madrid", "cookies", "gestion-clinicas-dentales", "inversion-detalle", "metodo", "preguntas", "privacidad"];
 /* =====================================================================
    CONFIG DEX · todo el contenido variable se edita aquí.
    Estados:  [CONFIRMADO] dato dado por DEX · [PROVISIONAL] supuesto o texto a validar · [PENDIENTE] falta el dato
@@ -11,7 +11,7 @@ const CONFIG = {
     domicilio: "",                                         // [PENDIENTE]
     registro: "",                                          // [PENDIENTE] datos del Registro Mercantil
     fundador: "Jose Rodríguez Horrillo",                   // [CONFIRMADO]
-    cobertura: "Trabajamos en modelo híbrido, presencial y remoto, en varias provincias.", // [CONFIRMADO]
+    cobertura: "Trabajamos con clínicas dentales de la Comunidad de Madrid, en modelo híbrido: visitas a la clínica y trabajo en remoto.", // [CONFIRMADO] nov 2026: de momento solo Madrid
     provincias: []                                         // [PENDIENTE] p. ej. ["Madrid","Toledo"]
   },
   contacto: {

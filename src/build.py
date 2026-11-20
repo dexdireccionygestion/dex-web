@@ -28,12 +28,17 @@ PUBLICADO = {  # fecha en que cada artículo se publicó con su propia direcció
     'blog-protocolos': '2026-10-29', 'blog-gerente': '2026-10-29', 'blog-facturacion': '2026-11-18', 'blog-gabinete': '2026-11-18',
     'blog-cierre-mes': '2026-11-18', 'blog-equipo': '2026-11-18', 'blog-captacion': '2026-11-18',
     'blog-plan-anual': '2026-11-20', 'blog-recepcion': '2026-11-20',
+    'gestion-clinicas-dentales': None,  # poner la fecha el día que se publique
 }
 
-HOME = ('Gestión y dirección externa de clínicas dentales · DEX', None)
+HOME = ('DEX · Gestión y dirección externa de clínicas dentales en Madrid', None)
 # título, descripción, prioridad en el sitemap, tipo, migas (sección intermedia)
 PAGES = {
-    'consultoria-clinicas-dentales': ('Consultoría y gestión de clínicas dentales · DEX',
+    'gestion-clinicas-dentales': ('Gestión de clínicas dentales: guía completa en 8 áreas · DEX',
+        'Cómo gestionar una clínica dental: datos, objetivos, equipo, protocolos, pacientes, presupuestos, captación y costes. Qué mirar en cada área y por dónde empezar.', '0.9', 'post', 'blog'),
+    'consultoria-dental-madrid': ('Consultoría y gestión de clínicas dentales en Madrid · DEX',
+        'Dirección y gestión externa para clínicas dentales de la Comunidad de Madrid: visitas a la clínica y trabajo en remoto durante 12 meses. Primer café sin compromiso.', '0.9', 'page', None),
+    'consultoria-clinicas-dentales': ('Consultoría para clínicas dentales que se queda a implantar · DEX',
         'Consultoría y gestión de clínicas dentales que se queda a implantar: diagnóstico, objetivos, protocolos y seguimiento semanal durante 12 meses.', '0.9', 'page', None),
     'metodo': ('Método DEX: 12 meses de dirección para tu clínica dental',
         'Así son los 12 meses de dirección externa con DEX: diagnóstico 360º, objetivos, protocolos, seguimiento mensual y acciones de temporada, mes a mes.', '0.9', 'page', None),
@@ -214,9 +219,11 @@ def main():
             lds.append(post_ld)
         if key == 'preguntas' and faq:
             lds.append({"@context": "https://schema.org", **faq[0]})
-        if key == 'consultoria-clinicas-dentales':
-            lds.append({"@context": "https://schema.org", "@type": "Service", "name": "Consultoría y gestión de clínicas dentales",
-                        "serviceType": "Dirección y gestión externa de clínicas dentales", "provider": ORG, "areaServed": {"@type": "Country", "name": "España"},
+        if key in ('consultoria-clinicas-dentales', 'consultoria-dental-madrid'):
+            lds.append({"@context": "https://schema.org", "@type": "Service",
+                        "name": "Consultoría y gestión de clínicas dentales" + (" en Madrid" if key.endswith('madrid') else ""),
+                        "serviceType": "Dirección y gestión externa de clínicas dentales", "provider": ORG,
+                        "areaServed": {"@type": "AdministrativeArea", "name": "Comunidad de Madrid"},
                         "url": url, "description": desc})
         d = OUT / key
         d.mkdir(exist_ok=True)
