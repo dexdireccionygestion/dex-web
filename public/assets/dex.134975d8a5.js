@@ -132,7 +132,7 @@ const CONFIG = {
     marcaOEPM: "",                                         // [OPCIONAL] número de registro de la marca DEX
     conservacionMeses: 12,                                 // [PROVISIONAL] reservas y consultas sin contratación
     fuentesPropias: true,
-    ubicacionUmami: "Estados Unidos (servicio en la nube). No guarda tu dirección IP ni usa cookies.",   // [CONFIRMAR] al crear la cuenta de Umami                                  // true cuando las tipografías se alojen en el propio dominio
+    ubicacionUmami: "Unión Europea (región de datos UE de Umami Cloud). No guarda tu dirección IP ni usa cookies.",                                  // true cuando las tipografías se alojen en el propio dominio
     proveedores: [                                         // [PENDIENTE] completar al conectar los servicios
       { servicio:"Alojamiento de la web", nombre:"Netlify, Inc.", ubicacion:"Estados Unidos (adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
       { servicio:"Correo electrónico", nombre:"Google (Google Workspace: Gmail)", ubicacion:"UE y otros países (Google Ireland Ltd.; Google LLC adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
@@ -159,7 +159,7 @@ const CONFIG = {
      (cloud.umami.is > Settings > Websites > Edit > Website ID). Solo mide en el dominio real, no en vistas previas. */
   analytics: {
     proveedor: "umami",
-    websiteId: "",                                         // [PENDIENTE] pegar aquí el Website ID
+    websiteId: "4c55efe9-618a-4890-a2f9-3d17b116ed4f",     // cuenta de Umami Cloud de jrodriguez@ (región UE)
     src: "https://cloud.umami.is/script.js",
     dominio: "dexdireccionygestion.com",
     get enabled(){ return !!this.websiteId; }
