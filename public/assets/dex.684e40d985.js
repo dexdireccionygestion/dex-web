@@ -1,4 +1,4 @@
-window.DEX_PAGES = ["autodiagnostico", "aviso-legal", "blog", "blog-agenda", "blog-captacion", "blog-cierre-mes", "blog-equipo", "blog-facturacion", "blog-gabinete", "blog-gerente", "blog-indicadores", "blog-presupuestos", "blog-protocolos", "consultoria-clinicas-dentales", "cookies", "inversion-detalle", "metodo", "preguntas", "privacidad"];
+window.DEX_PAGES = ["autodiagnostico", "aviso-legal", "blog", "blog-agenda", "blog-captacion", "blog-cierre-mes", "blog-equipo", "blog-facturacion", "blog-gabinete", "blog-gerente", "blog-indicadores", "blog-plan-anual", "blog-presupuestos", "blog-protocolos", "blog-recepcion", "consultoria-clinicas-dentales", "cookies", "inversion-detalle", "metodo", "preguntas", "privacidad"];
 /* =====================================================================
    CONFIG DEX · todo el contenido variable se edita aquí.
    Estados:  [CONFIRMADO] dato dado por DEX · [PROVISIONAL] supuesto o texto a validar · [PENDIENTE] falta el dato
@@ -124,14 +124,15 @@ const CONFIG = {
      Vacío = el formulario valida y prepara el mensaje, y se muestra cómo enviarlo por correo, teléfono o WhatsApp. */
   /* Textos legales (aviso legal, privacidad y cookies). Lo vacío se muestra como [pendiente] en la web. */
   legal: {
-    actualizado: "18 de noviembre de 2026",
+    actualizado: "20 de noviembre de 2026",
     dominio: "dexdireccionygestion.com",              // [CONFIRMADO]
     jurisdiccion: "",                                      // [PENDIENTE] ciudad del domicilio social, p. ej. "Madrid"
     emailPrivacidad: "",                                   // [OPCIONAL] vacío = se usa contacto.email
     dpd: "",                                               // [OPCIONAL] solo si se designa delegado de protección de datos
     marcaOEPM: "",                                         // [OPCIONAL] número de registro de la marca DEX
     conservacionMeses: 12,                                 // [PROVISIONAL] reservas y consultas sin contratación
-    fuentesPropias: true,                                  // true cuando las tipografías se alojen en el propio dominio
+    fuentesPropias: true,
+    ubicacionUmami: "Estados Unidos (servicio en la nube). No guarda tu dirección IP ni usa cookies.",   // [CONFIRMAR] al crear la cuenta de Umami                                  // true cuando las tipografías se alojen en el propio dominio
     proveedores: [                                         // [PENDIENTE] completar al conectar los servicios
       { servicio:"Alojamiento de la web", nombre:"Netlify, Inc.", ubicacion:"Estados Unidos (adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
       { servicio:"Correo electrónico", nombre:"Google (Google Workspace: Gmail)", ubicacion:"UE y otros países (Google Ireland Ltd.; Google LLC adherida al Marco de Privacidad de Datos UE-EE. UU.)" },
@@ -154,8 +155,15 @@ const CONFIG = {
     /* true cuando esté configurado el envío automático del informe (función de Netlify + Brevo o Resend). Ver README. */
     informeAuto: true
   },                    // [PENDIENTE]
-  /* Analítica: desactivada. Activar solo con banner de consentimiento configurado. */
-  analytics: { enabled:false }
+  /* Analítica: Umami, sin cookies (no hace falta banner). Se activa sola al poner el Website ID de la cuenta de Umami
+     (cloud.umami.is > Settings > Websites > Edit > Website ID). Solo mide en el dominio real, no en vistas previas. */
+  analytics: {
+    proveedor: "umami",
+    websiteId: "",                                         // [PENDIENTE] pegar aquí el Website ID
+    src: "https://cloud.umami.is/script.js",
+    dominio: "dexdireccionygestion.com",
+    get enabled(){ return !!this.websiteId; }
+  }
 };
 
 /* ===================== utilidades ===================== */
@@ -168,8 +176,16 @@ const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}
 
 function track(name, data={}){
   try{ document.dispatchEvent(new CustomEvent("dex:track",{detail:{name,...data}})); }catch(e){}
-  if(!CONFIG.analytics.enabled || store.get("dex-consent")!=="granted") return;
-  (window.dataLayer = window.dataLayer || []).push({event:name, ...data});
+  if(!CONFIG.analytics.enabled || name === "page_view") return;   // Umami ya cuenta las visitas solo
+  try{ if(window.umami && window.umami.track) window.umami.track(name === "cta_click" && data.id ? data.id : name, data); }catch(e){}
+}
+function initAnalytics(){
+  const A = CONFIG.analytics;
+  if(!A.enabled || document.getElementById("umami") || location.hostname.replace(/^www\./,"") !== A.dominio) return;
+  const s = document.createElement("script");
+  s.id = "umami"; s.defer = true; s.src = A.src;
+  s.dataset.websiteId = A.websiteId; s.dataset.domains = A.dominio + ",www." + A.dominio; s.dataset.doNotTrack = "true";
+  document.head.appendChild(s);
 }
 document.addEventListener("click", e => { const t = e.target.closest("[data-track]"); if(t) track("cta_click",{id:t.dataset.track}); });
 
@@ -824,7 +840,7 @@ function initDiag(){
         <div class="ds-txt"><p class="ds-t">¿Aún no quieres llamar? Recibe tu informe completo por correo.</p><p class="ds-s">Tu puntuación, tus prioridades, qué hacer este mes en cada una y qué leer para empezar.</p></div>
         <div class="ds-row"><label class="sr" for="ds_email">Tu correo electrónico</label><input id="ds_email" type="email" autocomplete="email" placeholder="nombre@clinica.es" required><button class="btn" type="submit">Enviármelo</button></div>
         <label class="check ds-check" for="ds_priv"><input id="ds_priv" type="checkbox" required><span>Acepto la <button type="button" class="inline-link" data-dialog="dlgPrivacy">política de privacidad</button>.</span></label>
-        <label class="check ds-check ds-check2" for="ds_news"><input id="ds_news" type="checkbox"><span>Además, quiero recibir un artículo práctico al mes. Puedes darte de baja cuando quieras.</span></label>
+        <label class="check ds-check ds-check2" for="ds_news"><input id="ds_news" type="checkbox"><span>Además, quiero recibir dos correos de seguimiento sobre mis prioridades y un artículo práctico al mes. Puedo darme de baja con un clic.</span></label>
         <p class="err" id="ds_err" role="alert"></p>
       </form>
       <p class="micro">Si reservas, puedes adjuntar tus respuestas a la solicitud para preparar el café. Guardamos el resultado solo en este navegador durante ${DIAG_DIAS} días. <button type="button" class="inline-link" id="dqForget">Borrarlo</button></p>`;
@@ -994,7 +1010,8 @@ function avisoLegalHTML(){
 }
 function privacidadHTML(){
   const d = legalData(), L = d.L;
-  const prov = L.proveedores.map(p => `<tr><td><b>${esc(p.servicio)}</b></td><td>${PD(p.nombre, "proveedor pendiente")}</td><td>${PD(p.ubicacion, "pendiente")}</td></tr>`).join("");
+  const A = CONFIG.analytics.enabled;
+  const prov = L.proveedores.concat(A ? [{ servicio:"Analítica de visitas sin cookies", nombre:"Umami Software, Inc. (Umami Cloud)", ubicacion: L.ubicacionUmami }] : []).map(p => `<tr><td><b>${esc(p.servicio)}</b></td><td>${PD(p.nombre, "proveedor pendiente")}</td><td>${PD(p.ubicacion, "pendiente")}</td></tr>`).join("");
   return `<p class="post-lead">En DEX solo pedimos los datos que necesitamos para atender tu solicitud y preparar bien la conversación. Aquí te explicamos qué hacemos con ellos, de forma clara.</p>
   <h3>1. Responsable del tratamiento</h3>
   ${idTable(d)}
@@ -1015,7 +1032,8 @@ function privacidadHTML(){
       <tr><td>Gestionar tu reserva o tu petición de llamada, confirmarte la cita y preparar la reunión.</td><td>Aplicación de medidas precontractuales a petición tuya (art. 6.1.b RGPD).</td></tr>
       <tr><td>Usar tu autodiagnóstico adjunto y los datos opcionales para conocer la situación de partida de tu clínica.</td><td>Tu consentimiento (art. 6.1.a RGPD), que das al adjuntarlos y puedes retirar cuando quieras.</td></tr>
       <tr><td>Enviarte el informe del autodiagnóstico a tu correo.</td><td>Tu consentimiento (art. 6.1.a RGPD).</td></tr>
-      <tr><td>Si lo marcas, enviarte un artículo práctico al mes sobre la gestión de clínicas dentales.</td><td>Tu consentimiento expreso (art. 6.1.a RGPD y art. 21 LSSI-CE). Puedes darte de baja en cualquier momento desde el propio correo o escribiéndonos.</td></tr>
+      <tr><td>Si lo marcas, enviarte dos correos de seguimiento sobre las prioridades de tu informe (a los 2 y a los 6 días) y un artículo práctico al mes sobre la gestión de clínicas dentales.</td><td>Tu consentimiento expreso (art. 6.1.a RGPD y art. 21 LSSI-CE). Puedes darte de baja en cualquier momento con el enlace que va en cada correo o escribiéndonos.</td></tr>
+      ${A ? `<tr><td>Medir de forma agregada cuántas visitas recibe la web y qué páginas y botones se usan, para mejorarla. No te identifica.</td><td>Nuestro interés legítimo en mejorar la web (art. 6.1.f RGPD).</td></tr>` : ""}
       <tr><td>Responder a tus consultas por correo${CONFIG.contacto.whatsapp ? ", teléfono o WhatsApp" : " o teléfono"}.</td><td>Tu consentimiento y, si preguntas por nuestros servicios, medidas precontractuales (art. 6.1.a y 6.1.b RGPD).</td></tr>
       <tr><td>Si contratas: prestar el servicio, facturar y cumplir nuestras obligaciones fiscales y mercantiles.</td><td>Ejecución del contrato y cumplimiento de obligaciones legales (art. 6.1.b y 6.1.c RGPD).</td></tr>
     </tbody></table></div>
@@ -1025,7 +1043,7 @@ function privacidadHTML(){
   <h3>5. Cuánto tiempo los conservamos</h3>
   <ul>
     <li><b>Reservas, consultas y autodiagnósticos</b> que no terminan en contratación: ${esc(String(L.conservacionMeses))} meses desde el último contacto.</li>
-    <li><b>Suscripción a los artículos mensuales:</b> hasta que te des de baja.</li>
+    <li><b>Correos de seguimiento y artículos mensuales:</b> hasta que te des de baja.</li>
     <li><b>Clientes:</b> mientras dure el contrato y, después, durante los plazos legales: seis años para la documentación mercantil (art. 30 del Código de Comercio) y cuatro años para la tributaria (Ley General Tributaria).</li>
     <li>Pasados esos plazos, los datos se suprimen o se bloquean durante el tiempo en que puedan exigirse responsabilidades.</li>
   </ul>
@@ -1052,7 +1070,7 @@ function privacidadHTML(){
 }
 function cookiesHTML(){
   const d = legalData(), L = d.L, A = CONFIG.analytics.enabled;
-  return `<p class="post-lead">Esta web <b>no usa cookies de publicidad ni de seguimiento</b>${A ? ", y solo usa cookies de analítica si las aceptas" : " ni de analítica"}. Solo guarda en tu navegador lo imprescindible para que funcionen las opciones que tú eliges.</p>
+  return `<p class="post-lead">Esta web <b>no usa cookies de publicidad ni de seguimiento</b>${A ? " ni de analítica: para contar las visitas usamos Umami, una herramienta que no usa cookies ni guarda nada en tu navegador" : " ni de analítica"}. Solo guarda en tu navegador lo imprescindible para que funcionen las opciones que tú eliges.</p>
   <h3>1. Qué son las cookies y el almacenamiento local</h3>
   <p>Las cookies y el almacenamiento local (<i>localStorage</i>) son pequeños archivos o datos que una web guarda en tu navegador. La ley (artículo 22.2 de la LSSI-CE) los trata igual, y exige tu consentimiento salvo que sean necesarios para un servicio que tú has pedido.</p>
   <h3>2. Qué guarda esta web</h3>
@@ -1060,12 +1078,12 @@ function cookiesHTML(){
     <thead><tr><th>Nombre</th><th>Para qué</th><th>Tipo</th><th>Duración</th></tr></thead>
     <tbody>
       <tr><td><code>dex_autodiagnostico</code></td><td>Guardar el resultado de tu autodiagnóstico para que puedas adjuntarlo si reservas otro día. No sale de tu navegador salvo que lo adjuntes a una reserva.</td><td>Propia · funcional, solo si haces el autodiagnóstico</td><td>${esc(String(DIAG_DIAS))} días</td></tr>
-      ${A ? `<tr><td><code>dex-consent</code></td><td>Recordar si has aceptado o rechazado la analítica.</td><td>Propia · técnica</td><td>12 meses</td></tr>` : ""}
     </tbody></table></div>
   <p>Ninguno de estos datos se usa para hacer un perfil de tu navegación ni se comparte con terceros.</p>
   <h3>3. Servicios de terceros</h3>
   <ul>
     ${L.fuentesPropias ? "" : `<li><b>Google Fonts</b> (Google Ireland Ltd.): carga las tipografías de la web. No instala cookies, pero tu navegador se conecta a sus servidores y les comunica tu dirección IP.</li>`}
+    ${A ? `<li><b>Umami</b> (analítica de visitas): cuenta de forma agregada las páginas vistas y los clics en los botones principales, sin cookies, sin guardar nada en tu navegador y sin identificarte. Respeta la opción «No rastrear» de tu navegador.</li>` : ""}
     ${L.terceros.map(t => `<li><b>${esc(t.nombre)}</b>: ${esc(t.uso)}</li>`).join("")}
   </ul>
   <h3>4. Cómo borrarlos o gestionarlos</h3>
@@ -1073,7 +1091,7 @@ function cookiesHTML(){
   <p><button type="button" class="btn btn-ghost" id="lgClear">Borrar mis datos guardados en este navegador</button> <span class="lg-cleared" id="lgCleared" role="status"></span></p>
   <p>También puedes borrarlos o bloquearlos desde la configuración de tu navegador: <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Chrome</a>, <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>, <a href="https://support.mozilla.org/es/kb/Borrar%20cookies" target="_blank" rel="noopener">Firefox</a> o <a href="https://support.microsoft.com/es-es/microsoft-edge" target="_blank" rel="noopener">Edge</a>.</p>
   <h3>5. Cambios</h3>
-  <p>Si en el futuro incorporamos analítica o vídeos de otras plataformas, actualizaremos esta política y te pediremos el consentimiento antes de usar cualquier cookie que lo necesite, con la opción de rechazarla tan fácil como aceptarla.</p>
+  <p>Si en el futuro incorporamos ${A ? "" : "analítica con cookies o "}vídeos de otras plataformas, actualizaremos esta política y te pediremos el consentimiento antes de usar cualquier cookie que lo necesite, con la opción de rechazarla tan fácil como aceptarla.</p>
   <p>Más información sobre el tratamiento de tus datos en la <a href="/privacidad/">política de privacidad</a>.</p>
   <p class="lg-date">Última actualización: ${d.fecha}.</p>`;
 }
@@ -1104,5 +1122,5 @@ function legalTexts(){
 /* ===================== arranque ===================== */
 /* Cada página publicada solo contiene sus propias secciones: si una función no encuentra la suya, se salta y el resto sigue. */
 [renderIcons, renderCafeNotes, renderCalendar, renderPacks, initFAQ, renderTestimonials, renderMedia, renderContact, renderCostStack, renderCmpCards,
- initCalc, initMiniCalc, loadDiag, initForm, renderDiagAttach, renderQuickSlots, renderNextSlot, initPains, initDiag, initAreaGroups, legalTexts, initNav, initTheme, initWhatsApp, route]
+ initCalc, initMiniCalc, loadDiag, initForm, renderDiagAttach, renderQuickSlots, renderNextSlot, initPains, initDiag, initAreaGroups, legalTexts, initNav, initTheme, initWhatsApp, initAnalytics, route]
   .forEach(fn => { try{ fn(); }catch(e){ if(window.console) console.debug("DEX:", fn.name, e.message); } });

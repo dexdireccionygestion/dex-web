@@ -25,7 +25,9 @@ ORG = {"@type": "Organization", "name": "DEX Dirección y Gestión", "url": BASE
        "logo": {"@type": "ImageObject", "url": BASE + '/assets/dex-icono-512.png'}}
 PUBLICADO = {  # fecha en que cada artículo se publicó con su propia dirección
     'blog-presupuestos': '2026-10-29', 'blog-indicadores': '2026-10-29', 'blog-agenda': '2026-10-29',
-    'blog-protocolos': '2026-10-29', 'blog-gerente': '2026-10-29', 'blog-facturacion': None, 'blog-gabinete': None,
+    'blog-protocolos': '2026-10-29', 'blog-gerente': '2026-10-29', 'blog-facturacion': '2026-11-18', 'blog-gabinete': '2026-11-18',
+    'blog-cierre-mes': '2026-11-18', 'blog-equipo': '2026-11-18', 'blog-captacion': '2026-11-18',
+    'blog-plan-anual': None, 'blog-recepcion': None,  # poner la fecha el día que se publiquen
 }
 
 HOME = ('Gestión y dirección externa de clínicas dentales · DEX', None)
@@ -53,6 +55,8 @@ PAGES = {
     'blog-cierre-mes': (None, None, '0.7', 'post', 'blog'),
     'blog-equipo': (None, None, '0.7', 'post', 'blog'),
     'blog-captacion': (None, None, '0.7', 'post', 'blog'),
+    'blog-plan-anual': (None, None, '0.7', 'post', 'blog'),
+    'blog-recepcion': (None, None, '0.7', 'post', 'blog'),
     'aviso-legal': ('Aviso legal · DEX Dirección y Gestión', 'Aviso legal de la web de DEX Dirección y Gestión: titular, condiciones de uso y propiedad intelectual.', '0.2', 'page', None),
     'privacidad': ('Política de privacidad · DEX Dirección y Gestión', 'Cómo trata DEX Dirección y Gestión los datos personales de quienes usan su web, reservan un café o hacen el autodiagnóstico.', '0.2', 'page', None),
     'cookies': ('Política de cookies · DEX Dirección y Gestión', 'Qué cookies y almacenamiento local usa la web de DEX Dirección y Gestión y cómo gestionarlos.', '0.2', 'page', None),
